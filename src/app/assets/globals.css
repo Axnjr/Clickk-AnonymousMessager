@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap'); */
+
+@font-face {
+  font-family: "hk";
+  src: url(rP2Yp2ywxg089UriI5-g4vlH9VoD8Cmcqbu0-K4.woff2);
+}
+
+::selection {
+  background-color: black;
+  color: #d4ff00
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: rgb(170, 170, 170);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(255, 255, 255);
+  border-radius: 20rem;
+}
+
+body {
+  font-family: 'hk', sans-serif;
+  transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background-attachment: scroll;
+  overflow-x: hidden;
+  height: fit-content;
+  background-color: #f3f3f1;
+  transition: all 1s cubic-bezier(.4, 0, 1, 1);
+}
+
+.user_page {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#user_page_head {
+  -webkit-text-stroke: 1px;
+}
+
+button {
+  white-space: nowrap;
+}
+
+.nice_button {
+  transition: .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nice_button:hover {
+  background-color: black;
+  color: white;
+}
+
+.style1 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  /* border: none; */
+  cursor: pointer;
+}
+
+.style1::-webkit-color-swatch {
+  border-radius: 12px;
+  /* border: none; */
+}
+
+.style1::-moz-color-swatch {
+  border-radius: 12px;
+  border: none;
+}
+
+p {
+  font-weight: 600;
+}
+
+audio {
+  width: 75%;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-panel {
+  background-color: white;
+  color: #d4ff00;
+}
+
+.try {
+  background: rgb(255, 25, 0);
+  background: -moz-linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(255, 174, 0) 72%);
+  background: -webkit-linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(0, 115, 255) 72%);
+  background: linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(157, 0, 255) 72%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c41500", endColorstr="#ffffff", GradientType=1);
+}
+
+.FancyCoolBeans,
+.coolBeans1 {
+  border: 2px solid currentColor;
+  color: rgb(0, 0, 0);
+  overflow: hidden;
+  position: relative;
+  transition: 0.2s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+}
+
+.coolBeans2 {
+  /* border: 2px solid currentColor; */
+  color: rgb(0, 0, 0);
+  overflow: hidden;
+  position: relative;
+  transition: 0.2s transform ease-in-out;
+  will-change: transform;
+  z-index: 0;
+}
+
+.FancyCoolBeans::after {
+  background: rgb(255, 25, 0);
+  background: -moz-linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(255, 174, 0) 72%);
+  background: -webkit-linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(0, 115, 255) 72%);
+  background: linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(157, 0, 255) 72%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c41500", endColorstr="#ffffff", GradientType=1);
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(10deg);
+  transform-origin: top left;
+  transition: 0.2s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+.coolBeans1::after {
+  background-color: rgb(255, 0, 0);
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(10deg);
+  transform-origin: top left;
+  transition: 0.2s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+.coolBeans2::after {
+  background-color: rgb(0, 0, 0);
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-100%, 0) rotate(10deg);
+  transform-origin: top left;
+  transition: 0.2s transform ease-out;
+  will-change: transform;
+  z-index: -1;
+}
+
+
+.FancyCoolBeans:hover::after,
+.coolBeans1:hover::after,
+.coolBeans2:hover::after {
+  transform: translate(0, 0);
+}
+
+.FancyCoolBeans:hover {
+  transform: scale(1.05);
+  will-change: transform;
+  color: #ffffff;
+  border: black;
+  background: rgb(255, 25, 0);
+  background: -moz-linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(255, 174, 0) 72%);
+  background: -webkit-linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(0, 115, 255) 72%);
+  background: linear-gradient(90deg, rgb(255, 25, 0) 0%, rgb(157, 0, 255) 72%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c41500", endColorstr="#ffffff", GradientType=1);
+}
+
+.coolBeans1:hover {
+  transform: scale(1.05);
+  will-change: transform;
+  color: #ffffff;
+  /* background-color: red; */
+}
+
+.coolBeans2:hover {
+  transform: scale(1.05);
+  will-change: transform;
+  color: #ffffff;
+}
