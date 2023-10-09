@@ -27,8 +27,15 @@ export async function Fetcher(
 }
 
 export async function GetUserDetails() {
-	const session = await getSession();
-	const user = session?.user?.name
+
+	// * WHILE WORKING ON CODESPACES SIGN-IN WONT WORK HENCE
+	// * COMMENTED OUT "getSession" SINCE IT WONT WORK AS WELL
+	// * ONLY FOR DEV PURPOSE IT SHOULD BE ENABLED IN PRODUCTION.
+
+	// const session = await getSession();
+	// const user = session?.user?.name
+
+	const user = "yakshit chhipa"
 
 	if (!user) { return [] }
 
@@ -43,7 +50,7 @@ export async function GetUserDetails() {
 			return JSON.parse(cachedUer)
 		}
 		else {
-			const users = await prismaDB.user.findMany({ where: { name: session?.user?.name } });
+			const users = await prismaDB.user.findMany({ where: { name: user } });
 			await cache.set(user, JSON.stringify(users[0]))
 			console.log(colors.green.underline("STORED A USER IN CACHE"))
 			return users[0]
