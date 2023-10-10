@@ -3,7 +3,7 @@ import UserStats from "@/components/dashboard/UserStats"
 import UserForm from "@/components/dashboard/UserForm"
 import Themes from "@/components/dashboard/Themes"
 import { DataContext } from "@/providers/FetchedDataProvider"
-import { userType } from "@/types/all-required-types";
+import { userType } from "../../../types/all-required-types";
 
 export default function DashboardWrapper({ data, children, loading } : { data: userType, children : React.ReactNode, loading?: boolean }) {
     return (

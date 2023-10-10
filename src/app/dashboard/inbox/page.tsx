@@ -1,9 +1,9 @@
 "use client";
 import { useContext, useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs"
-import { pusherClient } from "@/lib/pusher";
-import { MessagesType } from "@/types/all-required-types";
-import { Fetcher } from "@/lib/utils";
+import { pusherClient } from "../../../../backendLib/pusher";
+import { MessagesType } from "../../../../types/all-required-types";
+import { Fetcher } from "../../../../lib/utils";
 import MapMessage from "@/components/dashboard/MapMessage";
 import { DataContext } from "@/providers/FetchedDataProvider"
 import { InfoCircledIcon } from "@radix-ui/react-icons";

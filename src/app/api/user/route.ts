@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prismaDB } from "@/lib/prismaDb";
-import { DeleteFromFirebase } from "@/lib/firebaseCdnHelper";
+import { prismaDB } from "../../../../backendLib/prismaDb";
+import { DeleteFromFirebase } from "../../../../lib/firebaseCdnHelper";
 
 export async function GET(request: NextRequest) {
     const req = request?.nextUrl?.searchParams?.get("username")?.replace(/["\\/]/g, '')

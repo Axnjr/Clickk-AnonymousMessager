@@ -9,7 +9,7 @@ import {
     DialogTitle,
     DialogTrigger 
 } from "@/components/ui/Dialog"
-import { Fetcher } from "@/lib/utils"
+import { Fetcher } from "../../lib/utils"
 import { useState, useContext } from "react"
 import { DataContext } from "@/providers/FetchedDataProvider"
 

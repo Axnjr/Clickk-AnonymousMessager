@@ -3,8 +3,8 @@ import { useState, useRef, useContext } from 'react';
 import { Button } from "@/components/ui/Button"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/Dialog"
 import Loading from '@/app/loading';
-import { UploadToFirebase } from '@/lib/firebaseCdnHelper';
-import { Fetcher } from '@/lib/utils';
+import { UploadToFirebase } from '../../lib/firebaseCdnHelper';
+import { Fetcher } from '../../lib/utils';
 import { DataContext } from "@/providers/FetchedDataProvider"
 
 export default function SendVoiceMessage() {

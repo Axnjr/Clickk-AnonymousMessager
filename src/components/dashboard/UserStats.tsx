@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/Button"
 import { DataContext } from "@/providers/FetchedDataProvider"
 import { useContext, useEffect } from "react"
-import { Fetcher } from "@/lib/utils"
+import { Fetcher } from "../../../lib/utils"
 import { useQuery } from "react-query"
 import Loading from "../../app/loading"
 import Link from "next/link"

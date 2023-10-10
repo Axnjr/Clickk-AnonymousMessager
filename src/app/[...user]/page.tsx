@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
-import { prismaDB } from "../../lib/prismaDb";
-import { cn } from '@/lib/utils';
+import { prismaDB } from "../../../backendLib/prismaDb";
+import { cn } from '../../../lib/utils';
 import "../../app/assets/globals.css"
 import UserPageWrapper from '@/components/userpage/UserPageWrapper';
 import { Suspense } from 'react';

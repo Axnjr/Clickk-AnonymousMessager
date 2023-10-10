@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prismaDB } from "@/lib/prismaDb";
-import { NextApiResponseServerIO } from "@/types/all-required-types";
-import { pusherServer } from '@/lib/pusher'
+import { prismaDB } from "../../../../backendLib/prismaDb";
+import { NextApiResponseServerIO } from "../../../../types/all-required-types";
+import { pusherServer } from '../../../../backendLib/pusher'
 var colors = require('colors');
 
 async function ClassifyMessage(data: { "inputs": string }) {

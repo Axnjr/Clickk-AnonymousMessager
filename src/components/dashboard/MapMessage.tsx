@@ -9,9 +9,9 @@ import {
     DialogTrigger,
 } from "@/components/ui/Dialog"
 import { Button } from "../ui/Button";
-import { MessagesType } from "@/types/all-required-types"
+import { MessagesType } from "../../../types/all-required-types"
 import { TrashIcon } from "@radix-ui/react-icons";
-import { Fetcher } from "@/lib/utils";
+import { Fetcher } from "../../../lib/utils";
 import { useToast } from "@/components/ui/use-toast"
 
 export default function MapMessage({ loading, messages, messageType } : { loading: boolean, messages: MessagesType[], messageType: string[] }) {

@@ -1,7 +1,7 @@
 "use client";
 import SendTextMessage from "@/components/SendTextMessage"
 import SendVoiceMessage from "@/components/SendVoiceMessage"
-import { userType } from "@/types/all-required-types"
+import { userType } from "../../../types/all-required-types"
 import { DataContext } from "@/providers/FetchedDataProvider";
 
 export default function UserPageWrapper({ data } : { data : userType }) {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prismaDB } from "@/lib/prismaDb";
+import { prismaDB } from "../../../../backendLib/prismaDb";
 // var colors = require("colors")
 
 export async function GET(request: NextRequest) {

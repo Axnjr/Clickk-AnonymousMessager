@@ -1,5 +1,5 @@
 "use client";
-import { userType } from "@/types/all-required-types";
+import { userType } from "../../types/all-required-types";
 import { createContext } from "react";
 
 type DataContextType = {

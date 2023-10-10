@@ -1,5 +1,5 @@
-import { Fetcher } from "@/lib/utils";
-import { MessagesType } from "@/types/all-required-types";
+import { Fetcher } from "../../lib/utils";
+import { MessagesType } from "../../types/all-required-types";
 import { useEffect, useState } from "react";
 
 export default function useMessages(id:string | null){

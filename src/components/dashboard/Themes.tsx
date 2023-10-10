@@ -1,5 +1,5 @@
 "use client"
-import { IntitiateUpdate, cn } from "@/lib/utils"
+import { IntitiateUpdate, cn } from "../../../lib/utils"
 import { Checkbox } from "../ui/checkbox"
 import { useState, useContext } from "react"
 import { Button } from "../ui/Button"
