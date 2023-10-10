@@ -11,7 +11,7 @@ export default function Profile({ ProfileImage } : { ProfileImage : string | nul
     const user = session?.user?.name
     const email = session?.user?.email
 
-    console.log(user,email)
+    // console.log(user,email)
 
     async function deleteUser(user_email: string | null | undefined, img? : string | null) {
         await fetch(`/api/user?user_email=${user_email}&img=${img}`,{ method:"DELETE" })

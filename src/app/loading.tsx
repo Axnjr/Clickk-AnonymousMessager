@@ -27,10 +27,11 @@ export default function Loading({ message, type, className }
 							</g>
 						</g>
 					</svg>
+					<h1 className="text-xs font-bold text-center -mt-6">{message}</h1>
 				</div>
 			}
 			{
-				type === "big" && <div className={cn("w-screen h-screen flex items-center justify-center", className)}>
+				type === "big" && <div className={cn("absolute top-0 left-0 w-screen h-screen flex flex-col items-center justify-center", className)}>
 					<svg className="animate-spin w-16 h-16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38">
 						<defs>
 							<linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
@@ -50,9 +51,9 @@ export default function Loading({ message, type, className }
 							</g>
 						</g>
 					</svg>
+					<h1 className="text-md font-bold text-center mt-4">{message}</h1>
 				</div>
 			}
-			<h1 className="text-xs font-bold text-center -mt-6">{message}</h1>
 		</>
 	)
 }
