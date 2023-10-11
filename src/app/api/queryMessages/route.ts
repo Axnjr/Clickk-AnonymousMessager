@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
     // })))
 }
 
-export async function POST(request: NextRequest, res: NextApiResponseServerIO) {
+export async function POST(request: NextRequest) {
     const mes = request?.nextUrl?.searchParams?.get("message")?.replace(/["\\/]/g, ''),
         userID = request?.nextUrl?.searchParams?.get("userId")?.replace(/["\\/]/g, ''),
         type = request?.nextUrl?.searchParams?.get("type")?.replace(/["\\/]/g, ''),
@@ -119,17 +119,19 @@ export async function POST(request: NextRequest, res: NextApiResponseServerIO) {
     return new NextResponse("Error either params 'message' or 'userID' or 'type' was not provided")
 }
 
-export async function PATCH(request: NextRequest, res: NextApiResponseServerIO) {
+export async function PUT(request: NextRequest) {
     const req = request?.nextUrl?.searchParams?.get("messageId")?.replace(/["\\/]/g, '')
+    console.log(req)
     try {
         await prismaDB.messages.update({
             where: {
                 id: req
             },
             data: {
-                status: "neagtive"
+                status: "negative"
             }
         })
+        console.log("QUERY MESSAGES API ROUTE MOVED A MESSAGE TO SPAM")
         return new NextResponse("ok", { status: 200 })
     } catch (error) {
         console.log(colors.bgBlue.yellow.underline(error))

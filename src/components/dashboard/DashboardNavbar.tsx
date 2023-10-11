@@ -25,7 +25,7 @@ export default async function DashboardNavbar() {
                     <Link href={`/${user ? user.name : ""}`}>Live</Link>
                 </Button>
                 <Button variant="link" className='font-semibold text-md rounded-lg mx-1 tracking-tight xl:text-xl'>
-                    <Link href={`/dashboard/inbox?id=${user ? user.id : ""}&res=${user ? user.responseType : ""}`}>Inbox</Link>
+                    <Link href={`/dashboard`}>Inbox</Link>
                 </Button>
             </div>
             <div className="flex items-center mr-2">

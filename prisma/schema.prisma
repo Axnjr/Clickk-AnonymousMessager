@@ -47,7 +47,7 @@ model User {
 
   messages     Messages[]
   question     String?
-  responseType String?    @default("text_only")
+  responseType String?    // divine users would have responseType : "any"
   // extra_param1      String?   @default("0,0,0,0")
   // "views:clicks:responses"
 

@@ -29,7 +29,9 @@ export default function UserPageWrapper({ data } : { data : userType }) {
                     <div className="flex items-center">
                         <DataContext.Provider value={{ data }}>
                             <SendTextMessage />
-                            <SendVoiceMessage />
+                            {
+                                data.responseType != "text_only" && <SendVoiceMessage />
+                            }
                         </DataContext.Provider>
                     </div>
                 </div>

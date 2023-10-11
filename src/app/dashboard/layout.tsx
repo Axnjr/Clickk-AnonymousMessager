@@ -5,7 +5,8 @@ import { Suspense } from "react";
 import Loading from '../loading';
 import { GetUserDetails } from '../../../lib/utils';
 import { redirect } from 'next/navigation';
-import DashboardWrapper from '@/components/dashboard/DashboardWrapper';
+import { DashboardWrapper } from '@/components/dashboard/DashboardWrapper';
+import { cache } from 'react';
 
 export const metadata: Metadata = {
     title: 'Clickk™ | Dashboard 📫',
