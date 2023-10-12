@@ -2,7 +2,7 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "../../../lib/utils"
+import { cn } from "../../lib/utils"
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-neutral-400 disabled:pointer-events-none disabled:opacity-50 dark:focus-visible:ring-neutral-800",
@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-neutral-900 text-neutral-50 shadow hover:bg-neutral-900/90 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90",
+          "text-[#d4ff00] bg-black shadow hover:bg-neutral-900/90 dark:bg-neutral-50 dark:text-neutral-900 dark:hover:bg-neutral-50/90",
         destructive: "coolBeans1",
           // "bg-red-600 text-neutral-50 shadow-sm hover:bg-red-500/90 dark:bg-red-900 dark:text-red-50 dark:hover:bg-red-900/90",
         outline:
@@ -21,7 +21,7 @@ const buttonVariants = cva(
         // "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
         link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
         fancy: "FancyCoolBeans",
-        gentle:"hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
+        gentle:"hover:bg-neutral-100 text-stone-800 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
         normal : "bg-black text-white hover:bg-transparent hover:border-2 hover:text-black border-black"
       },
       size: {

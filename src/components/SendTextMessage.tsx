@@ -1,20 +1,13 @@
 "use client"
 import { Button } from "@/components/ui/Button"
-import { 
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger 
-} from "@/components/ui/Dialog"
-import { Fetcher } from "../../lib/utils"
-import { useState, useContext } from "react"
-import { DataContext } from "@/providers/FetchedDataProvider"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/Dialog"
+import { Fetcher } from "../lib/utils"
+import { useState } from "react"
+import { useAllDataFromUserContext } from "@/hooks/useDataFromUserContext"
+import { userType } from "../../types/all-required-types"
 
 export default function SendTextMessage() {
-    const { data } = useContext(DataContext)
+    const data : userType = useAllDataFromUserContext()
     const [success, setSuccess] = useState(false)
     const [loading, setLoading] = useState(false)
 
@@ -33,7 +26,7 @@ export default function SendTextMessage() {
         <>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button className="m-2 w-3/5 h-12 text-lg font-medium rounded-xl">Send Text Message</Button>
+                    <Button className="m-2 w-fit h-12 text-lg font-medium rounded-xl">Send Text Message</Button>
                 </DialogTrigger>
                 <DialogContent className="w-3/2 border border-white text-center">
                     {

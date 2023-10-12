@@ -1,30 +1,26 @@
 import { notFound } from 'next/navigation'
 import { prismaDB } from "../../../backendLib/prismaDb";
-import { cn } from '../../../lib/utils';
-import "../../app/assets/globals.css"
+import { cn } from '../../lib/utils';
+import "@/app/assets/globals.css"
 import UserPageWrapper from '@/components/userpage/UserPageWrapper';
 import { Suspense } from 'react';
-import Loading from '../loading';
-
-interface pageProps {
-    params: { user: string }
-    // searchParams: { [key: string]: string | string[] | undefined }
-}
+import Loading from '@/app/loading';
+import { userType, pageProps } from '../../../types/all-required-types';
 
 export default async function UserPage({ params } : pageProps) {
     const user_name = `${params["user"]}`.replaceAll("%20", " ")
-    const data : any = await prismaDB.user.findMany({ where: { name : user_name } })
+    const data : userType[] | any = await prismaDB.user.findMany({ where: { name : user_name } })
     if (!data[0]) { notFound() }
-    else{
+    else if(data[0].membership){
         (async () => {
-            // try {
-            //     let t = await prismaDB.userAnalytics.upsert({
-            //         where : { userId:data[0].id },
-            //         update : { page_views:{increment:1}, },
-            //         create : { userId : data[0].id, page_views : 1 }
-            //     })
-            //     // console.log(t)
-            // } catch (error) { console.log(error) }
+            try {
+                let t = await prismaDB.userAnalytics.upsert({
+                    where : { userId:data[0].id },
+                    update : { page_views:{increment:1}, },
+                    create : { userId : data[0].id, page_views : 1 }
+                })
+                // console.log(t)
+            } catch (error) { console.log(error) }
         })();
     }
 

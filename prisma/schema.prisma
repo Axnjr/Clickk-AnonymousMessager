@@ -47,9 +47,7 @@ model User {
 
   messages     Messages[]
   question     String?
-  responseType String?    // divine users would have responseType : "any"
-  // extra_param1      String?   @default("0,0,0,0")
-  // "views:clicks:responses"
+  membership   String?    // ( "normal" || null ) || "divine"
 
   image         String?
   accounts      Account[]

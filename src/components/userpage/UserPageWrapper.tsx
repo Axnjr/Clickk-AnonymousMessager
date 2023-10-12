@@ -13,7 +13,7 @@ export default function UserPageWrapper({ data } : { data : userType }) {
     }
 
     return (
-        <div onClick={UpdatePageClicks} className="w-screen h-screen flex flex-col justify-center items-center">
+        <div onClick={data.membership ? UpdatePageClicks : () => {}} className="w-screen h-screen flex flex-col justify-center items-center">
             <br />
             <br />
             <section className="mt-2 flex flex-col rounded-3xl w-11/12 md:w-3/2 lg:w-3/5 h-fit">
@@ -30,7 +30,7 @@ export default function UserPageWrapper({ data } : { data : userType }) {
                         <DataContext.Provider value={{ data }}>
                             <SendTextMessage />
                             {
-                                data.responseType != "text_only" && <SendVoiceMessage />
+                                data.membership && <SendVoiceMessage />
                             }
                         </DataContext.Provider>
                     </div>

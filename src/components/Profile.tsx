@@ -11,8 +11,6 @@ export default function Profile({ ProfileImage } : { ProfileImage : string | nul
     const user = session?.user?.name
     const email = session?.user?.email
 
-    // console.log(user,email)
-
     async function deleteUser(user_email: string | null | undefined, img? : string | null) {
         await fetch(`/api/user?user_email=${user_email}&img=${img}`,{ method:"DELETE" })
         toast({
@@ -27,7 +25,8 @@ export default function Profile({ ProfileImage } : { ProfileImage : string | nul
 
     return (
         <DropdownMenu.Root>
-            <DropdownMenu.Trigger className='flex p-1 items-center mr-4 focus:outline-none border-2 border-black rounded-full'>
+            <DropdownMenu.Trigger className='flex p-1 items-center mr-4 focus:outline-none border-2 border-black 
+            rounded-full'>
                 <img className='w-8 h-8 object-cover object-center rounded-full'
                 src={ProfileImage ? ProfileImage : ""} alt={user ? user : ""}/>
             </DropdownMenu.Trigger>

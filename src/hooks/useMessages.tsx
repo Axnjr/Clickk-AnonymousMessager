@@ -1,4 +1,4 @@
-import { Fetcher } from "../../lib/utils";
+import { Fetcher } from "../lib/utils";
 import { MessagesType } from "../../types/all-required-types";
 import { useEffect, useState } from "react";
 

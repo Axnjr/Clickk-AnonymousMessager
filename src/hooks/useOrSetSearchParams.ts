@@ -19,5 +19,5 @@ export default function useOrSetSearchParams() {
         }
     }, [])
 
-    return [id,skip,data.responseType]
+    return [id,skip]
 }

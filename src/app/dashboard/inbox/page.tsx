@@ -1,15 +1,14 @@
 "use client";
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs"
 import { pusherClient } from "../../../../backendLib/pusher";
 import { MessagesType } from "../../../../types/all-required-types";
-import { Fetcher } from "../../../../lib/utils";
+import { Fetcher } from "../../../lib/utils";
 import MapMessage from "@/components/dashboard/MapMessage";
-import { DataContext } from "@/providers/FetchedDataProvider"
 import { InfoCircledIcon, LockClosedIcon } from "@radix-ui/react-icons";
 import Advertisement from "@/components/Advertisement";
-import { useSearchParams, useRouter } from "next/navigation";
 import useOrSetSearchParams from "@/hooks/useOrSetSearchParams";
+import { useDataFromUserContext } from "@/hooks/useDataFromUserContext";
 
 // useEffect(() => {
 //     // @ts-ignore
@@ -25,7 +24,8 @@ import useOrSetSearchParams from "@/hooks/useOrSetSearchParams";
 
 export default function InboxPage() {
     
-    const [id,skipp,res] = useOrSetSearchParams()
+    const [id,skipp] = useOrSetSearchParams()
+    const membership = useDataFromUserContext("membership")
     const [messages, setMessages] = useState<MessagesType[]>([])
     const [loading, setLoading] = useState(true)
     const [skip, setSkip] = useState(skipp ? skipp : 0)
@@ -49,7 +49,7 @@ export default function InboxPage() {
                         <TabsTrigger className="ml-3 mr-1 px-3" value="text">Your Inbox {total}</TabsTrigger>
                         <TabsTrigger className="mx-1 px-3" value="spam">Spam</TabsTrigger>
                         {
-                            res 
+                            membership 
                                 ? 
                             <TabsTrigger value="voice">Voice Messages</TabsTrigger>
                                 :
