@@ -1,8 +1,8 @@
 "use client"
+import Loading from "@/app/loading"
 import { Button } from "@/components/ui/Button"
 import { Fetcher } from "../../lib/utils"
 import { useQuery } from "react-query"
-import Loading from "@/app/loading"
 import { useDataFromUserContext } from "@/hooks/useDataFromUserContext"
 import { LockClosedIcon } from "@radix-ui/react-icons"
 import { buttonList } from "./ArraysToBeMapped"
@@ -18,7 +18,8 @@ export default function UserStats() {
     })
 
     return (
-        <>{
+        <>
+        {
             isError ? <p className="bg-white p-4 text-center my-6 rounded-3xl flex items-center justify-center">Unable to laod your page statistics try refreshing the page 😥</p>
                 :
             <div className="p-6 xl:py-8 h-fit border bg-white w-full rounded-3xl text-center m-auto my-6">
@@ -32,7 +33,7 @@ export default function UserStats() {
                                     <Tooltip >
                                         <TooltipTrigger className={`rounded-3xl p-8 h-fit block hover:bg-neutral-100`}>
                                             <span className="xl:text-xl flex items-center">
-                                                <span className={`w-2 h-2 xl:w-3 xl:h-3 mr-2 rounded-full bg-${ele.color}`}></span>
+                                                <span className={`w-2 h-2 xl:w-3 xl:h-3 mr-2 rounded-full ${ele.color}`}></span>
                                                 {ele.name}:
                                             </span>
                                             <div className="mt-1 text-xl xl:text-2xl inline-block">
@@ -41,16 +42,10 @@ export default function UserStats() {
                                                         {membership ? (data.length > 0 ? data[0][ele.prop] : 0) : <LockClosedIcon className="mt-2"/>}
                                                     </span>
                                                 }
-                                                {
-                                                    !ele.membershipReq && <span>
-                                                        {data.length > 0 ? data[0][ele.prop] : 0}
-                                                    </span>
-                                                }
+                                                {!ele.membershipReq && <span>{data.length > 0 ? data[0][ele.prop] : 0}</span>}
                                             </div>
                                         </TooltipTrigger>
-                                        <TooltipContent>
-                                            {ele.membershipReq ? <p>Go divine for detailed analysis</p> : <p>{ele.name}</p>}
-                                        </TooltipContent>
+                                        <TooltipContent>{ele.membershipReq && membership == "divine" ? "Go divine for detailed analysis" : `${ele.name}`}</TooltipContent>
                                     </Tooltip>
                               </TooltipProvider>
                             })
@@ -66,7 +61,7 @@ export default function UserStats() {
                         </Button>
                     </section>
                 }
-            </div>
-        }</>
+            </div>}
+        </>
     )
 }

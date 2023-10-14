@@ -1,4 +1,4 @@
-import AuthenticationProvider from '@/providers/Auth-&-QueryClient-Provider'
+import AuthenticationProvider from '@/providers/Auth-&-TRPCClient-Provider'
 import '../app/assets/globals.css'
 import type { Metadata } from 'next'
 import { Toaster } from "@/components/ui/toaster"

@@ -24,7 +24,7 @@ export default function MapMessage({ loading, messages, messageType } : { loadin
     return (
         <div className="relative rounded-2xl h-fit z-0 w-full text-black">
             {
-                loading ? <Loading type="big" message="Getting your messages ..." />
+                loading ? <Loading className="mt-20" type="medium" message="Getting your messages ..." />
                     :
                 <>
                 {

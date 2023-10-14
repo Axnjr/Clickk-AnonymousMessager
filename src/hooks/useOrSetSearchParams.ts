@@ -1,11 +1,11 @@
 "use client"
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { DataContext } from "@/providers/FetchedDataProvider"
+import { useAllDataFromUserContext } from "./useDataFromUserContext";
 
 export default function useOrSetSearchParams() {
     const router = useRouter()
-    const { data } = useContext(DataContext)
+    const data  = useAllDataFromUserContext()
     const searchParams  = useSearchParams()
           
     const [id,setId] = useState(searchParams?.get("userId"))

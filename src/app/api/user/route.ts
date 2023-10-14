@@ -27,7 +27,6 @@ export async function POST(request: NextRequest) {
             .on('error', err => console.log('Redis Client Error', err))
             .connect()
         ;
-
         if (req2 === "content" && req) {
             let t = await prismaDB.user.updateMany({
                 where: { name: req },
@@ -37,7 +36,6 @@ export async function POST(request: NextRequest) {
             if (temp) {
                 let t = JSON.parse(temp)
                 await cache.set(req, JSON.stringify({ ...t, ...json }))
-                console.log("UPADTED REDIS CACHE SUCCEFULLY 😎😆🙂🤗🫡🔥🤟✨✅")
             }
         }
 
@@ -49,14 +47,16 @@ export async function POST(request: NextRequest) {
             let temp = await cache.get(req);
             if (temp) {
                 let t = JSON.parse(temp)
-                await cache.set(req, JSON.stringify({ ...t, ...json.data }))
-                console.log("UPADTED REDIS CACHE SUCCEFULLY 😎😆🙂🤗🫡🔥🤟✨✅")
+                t.backgroundStyles = json.data
+                await cache.set(req, JSON.stringify({ ...t }))
             }
         }
+        console.log("UPADTED REDIS CACHE SUCCEFULLY 😎😆🙂🤗🫡🔥🤟✨✅")
         return new NextResponse("done", { status: 200 })
-    } catch (error) {
-        console.log(error,"☠️☠️☠️☠️💀💀💀💀🔥🔥😑😑🔒😥 user api route POST handler !")
-        return new NextResponse("dang it !!",{status:500})
+    }
+    catch (error) {
+        console.log(error, "☠️☠️☠️☠️💀💀💀💀🔥🔥😑😑🔒😥 user api route POST handler !")
+        return new NextResponse("dang it !!", { status: 500 })
     }
 
 }

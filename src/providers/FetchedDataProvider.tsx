@@ -12,7 +12,7 @@ export const DataContext = createContext<DataContextType>({
         id:"",
         name:"",
         question:"",
-        extra_param1:"",
+        membership:"",
         image:"",
         backgroundStyles:"",
         buttonStyles:""

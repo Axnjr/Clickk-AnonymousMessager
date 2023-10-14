@@ -1,95 +1,113 @@
 export const buttonList = [
     {
         name: "Page Views",
-        prop:"page_views",
-        membershipReq:true,
-        color:"green-400"
+        prop: "page_views",
+        membershipReq: true,
+        color: "bg-green-400"
     },
     {
         name: "Page Clicks",
-        prop:"page_clicks",
-        membershipReq:true,
-        color:"blue-500"
+        prop: "page_clicks",
+        membershipReq: true,
+        color: "bg-blue-500"
     },
     {
-        name:"Responses",
-        prop:"responses",
-        membershipReq:false,
-        color:"amber-400"
+        name: "Responses",
+        prop: "responses",
+        membershipReq: false,
+        color: "bg-amber-400"
     },
     {
-        name:"Spam",
-        prop:"spam",
-        membershipReq:false,
-        color:"red-500"
+        name: "Spam",
+        prop: "spam",
+        membershipReq: false,
+        color: "bg-red-500"
     }
 ]
 
 export const themes = [
     {
-        name: "Default White",
-        bg: "bg-white text-black",
-        // bs:"bg-black"
+        name:"Radial Silver",
+        bg:"bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-slate-500 to-white text-black",
+        col:"black",
+        type:"divine"
     },
     {
-        name: "Blue",
-        bg: "bg-gradient-to-t from-blue-500 to-blue-700 text-white",
-        // bs:"bg-white"
+        name:"Pink red",
+        bg:"bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-black",
+        col:"black",
+        type:"divine"
     },
     {
-        name: "Fancy Red",
-        bg: "bg-[#c41500] text-amber-600",
-        // bs:"bg-white"
+        name:"Fuchsia orange",
+        bg:"bg-gradient-to-bl from-blue-900 via-fuchsia-300 to-orange-600 text-black",
+        col:"black",
+        type:"divine"
     },
     {
-        name: "Rose",
-        bg: "bg-gradient-to-b from-rose-300 to-red-400 text-black",
-        // bs: "bg-lime-400"
+        name:"Pink indigo",
+        bg:"bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-black",
+        col:"black",
+        type:"divine"
     },
     {
-        name: "Stone",
-        bg: "bg-gradient-to-t from-stone-500 to-black text-white",
-        // bs:"bg-white"
+        name:"Lime orange",
+        bg:"bg-gradient-to-br from-yellow-300 via-pink-500 to-cyan-500 text-white",
+        col:"white",
+        type:"divine"
     },
     {
-        name: "Green",
-        bg: "bg-gradient-to-t from-green-500 to-green-700 text-pink-500",
-        // bs:"bg-pink-500"
+        name:"Radial mix",
+        bg:"bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-red-400 via-gray-300 to-blue-500 text-black",
+        col:"black",
+        type:"divine"
     },
     {
-        name: "Black",
-        bg: "bg-black text-white"
+        name:"Yellow pink",
+        bg:"bg-gradient-to-bl from-yellow-200 via-pink-200 to-pink-400 text-black",
+        col:"black",
+        type:"divine"
     },
     {
-        name: "Orange",
-        bg: "bg-gradient-to-br from-orange-400 to-amber-500"
+        name:"Radial Purple",
+        bg:"bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-pink-300 via-purple-600 to-blue-900 text-white",
+        col:"white",
+        type:"normal"
     },
     {
-        name: "Red",
-        bg: "bg-gradient-to-br from-red-500 to-red-600"
+        name:"Gray Yellow",
+        bg:"bg-gradient-to-l from-neutral-800 via-gray-900 to-yellow-800 text-white",
+        col:"white",
+        type:"normal"
     },
     {
-        name: "Rose Blue",
-        bg: "bg-gradient-to-t from-rose-500 to-blue-500"
+        name:"Sky Purple",
+        bg:"bg-gradient-to-br from-sky-500 via-purple-600 to-sky-600 text-white",
+        col:"white",
+        type:"normal"
     },
     {
-        name: "Teal Red",
-        bg: "bg-gradient-to-tr from-teal-400 to-rose-200"
+        name:"Lime Stone",
+        bg:"bg-gradient-to-b from-lime-900 via-purple-400 to-stone-100 text-white",
+        col:"white",
+        type:"normal"
     },
     {
-        name: "Purple Amber",
-        bg: "bg-gradient-to-tr from-purple-500 to-amber-400"
+        name:"Sky Teal",
+        bg:"bg-gradient-to-tr from-sky-900 via-transparent to-teal-100 text-black",
+        col:"black",
+        type:"normal"
     },
     {
-        name: "Lime",
-        bg: "bg-gradient-to-bl from-lime-400 to-amber-50"
+        name:"Stone Orange",
+        bg:"bg-gradient-to-bl from-stone-100 via-orange-200 to-yellow-400 text-black",
+        col:"black",
+        type:"normal"
     },
     {
-        name: "Violet Cyan",
-        bg: "bg-gradient-to-br from-violet-500 to-cyan-400"
+        name:"Purple slate",
+        bg:"bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 text-white",
+        col:"white",
+        type:"normal"
     },
-    // {
-    //     name: "Background Image",
-    //     bg: "bg-[url('')] bg-cover bg-center"
-    // },
 ]

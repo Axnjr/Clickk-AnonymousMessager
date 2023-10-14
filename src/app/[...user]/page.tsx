@@ -1,7 +1,7 @@
+import "@/app/assets/globals.css"
 import { notFound } from 'next/navigation'
 import { prismaDB } from "../../../backendLib/prismaDb";
 import { cn } from '../../lib/utils';
-import "@/app/assets/globals.css"
 import UserPageWrapper from '@/components/userpage/UserPageWrapper';
 import { Suspense } from 'react';
 import Loading from '@/app/loading';
@@ -27,7 +27,8 @@ export default async function UserPage({ params } : pageProps) {
     return (
         <>
             <Suspense fallback={<Loading type='big' message='....'/>}>
-                <main className={cn("user_page w-screen min-h-screen flex flex-col justify-center items-center",data[0].backgroundStyles)}>
+                <main className={cn(`user_page w-screen min-h-screen flex flex-col 
+                justify-center items-center`,data[0].backgroundStyles)}>
                     <UserPageWrapper data={data[0]}/>
                     <a className="flex items-center p-12">
                         <h1 className="text-xl font-black tracking-tighter"><span></span>Echo™</h1>
