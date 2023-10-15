@@ -107,9 +107,28 @@ export function getCachingURL() {
 	else throw new Error("REDIS CACHE CONNECTION URL NOT FOUND IN THE .env FILE.")
 }
 
-async function GetCache() {
-	const cache = createClient({ url: getCachingURL() })
-	.on('error', err => console.log('Redis Client Error', err))
-	await cache.connect()
-	return cache
+export function getSiteURL(){
+	return process.env.NODE_ENV === "production"
+        ? 
+    "your-production-url/api/trpc"
+        : 
+    "http://localhost:3000/api/trpc"
+}
+
+export async function ClassifyMessage(data: { "inputs": string }) {
+    const response = await fetch(
+        "https://api-inference.huggingface.co/models/ProsusAI/finbert",
+        {
+            headers: { Authorization: "Bearer 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" },
+            method: "POST",
+            body: JSON.stringify(data),
+        }
+    );
+    try {
+        const result = await response.json();
+        return result[0][0].label
+    } catch (error) {
+        console.log("query ->", error)
+        return "unchecked"
+    }
 }

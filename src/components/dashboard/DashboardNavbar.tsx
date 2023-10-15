@@ -3,11 +3,10 @@ import { Button } from "@/components/ui/Button"
 import { Share2Icon, OpenInNewWindowIcon, ArchiveIcon, QuestionMarkCircledIcon } from "@radix-ui/react-icons"
 import Link from 'next/link'
 import Profile from '@/components/Profile'
-import { useContext } from "react"
-import { DataContext } from "@/providers/FetchedDataProvider"
+import { useAllDataFromUserContext } from "@/hooks/useDataFromUserContext";
 
 export default async function DashboardNavbar() {
-    const { data: user } = useContext(DataContext)
+    const user = useAllDataFromUserContext()
     return (
         <nav className=" w-screen m-auto bg-white shadow-2xl border border-neutral-300 z-50
             text-neutral-600 fixed top-0 left-1/2 -translate-x-1/2 flex flex-col justify-center">
@@ -26,7 +25,7 @@ export default async function DashboardNavbar() {
                             </Link>
                         </Button>
                         <Button variant="gentle" className='font-semibold text-md rounded-lg mx-1 tracking-tight xl:text-xl'>
-                            <Link className="flex items-center" href={`/dashboard/inbox`}>
+                            <Link className="flex items-center" href={`/dashboard/inbox?${user.id}`}>
                                 <ArchiveIcon className="mr-2" /> Inbox
                             </Link>
                         </Button>

@@ -3,14 +3,16 @@ import SendTextMessage from "@/components/SendTextMessage"
 import SendVoiceMessage from "@/components/SendVoiceMessage"
 import { userType } from "../../../types/all-required-types"
 import { DataContext } from "@/providers/FetchedDataProvider";
+import { trpc } from "@/app/_trpcClinetUsageLib/client";
 
 export default function UserPageWrapper({ data } : { data : userType }) {
 
-    async function UpdatePageClicks() { // increment page clicks
-        fetch(`/api/analytics?userId=${data.id}&prop="clicks"`)
-        .then(res => {})
-        .catch(err => console.log(err))
-    }
+    const { mutate : updateAnalytics } = trpc.updateAnalytics.useMutation({
+        onError: () => {alert("err")},
+        onSuccess: () => {alert("ok")}
+    })
+
+    async function UpdatePageClicks() { updateAnalytics() }
 
     return (
         <div onClick={data.membership ? UpdatePageClicks : () => {}} className="w-screen h-screen flex flex-col justify-center items-center">

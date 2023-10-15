@@ -1,22 +1,27 @@
 "use client"
 import Loading from "@/app/loading"
 import { Button } from "@/components/ui/Button"
-import { Fetcher } from "../../lib/utils"
-import { useQuery } from "react-query"
+import { useState, useEffect } from "react"
 import { useDataFromUserContext } from "@/hooks/useDataFromUserContext"
 import { LockClosedIcon } from "@radix-ui/react-icons"
 import { buttonList } from "./ArraysToBeMapped"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip"
+import { trpc } from "@/app/_trpcClinetUsageLib/client"
+import { userAnalytics } from "../../../types/all-required-types"
   
 function GetCTR(views: string, clicks: string) { return `~${Math.floor((Number(clicks) / Number(views)) * 100)}%` }
 
 export default function UserStats() {
-    const userID = useDataFromUserContext("id")
     const membership = useDataFromUserContext("membership")
-    const { data, isLoading, isError } = useQuery("data", async () => {
-        return await Fetcher(`/api/analytics?userId=${userID}`)
-    })
+    const [data,setData] = useState<userAnalytics[] | any>([])
+    const { data: analytics, isLoading, isError } = trpc.getAnalytics.useQuery()
 
+    useEffect(() => {
+        if(analytics){ 
+            setData([...JSON.parse(analytics)])
+        }
+    }, [analytics])
+    
     return (
         <>
         {

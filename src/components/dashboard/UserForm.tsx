@@ -51,7 +51,7 @@ export default function UserForm() {
                         {
                             loading === "image" ? <Loading className="w-28 h-28 xl:w-60 xl:h-52 border-2 border-[#d4ff00] rounded-full" type="small" message="" />
                                 :
-                                <img className="w-28 object-cover object-center h-28 xl:w-60 xl:h-52 border-2 border-[#bbff46] rounded-full shadow-2xl" src={copyOfData.image} alt={data.name} />
+                            <img className="w-28 object-cover object-center h-28 xl:w-60 xl:h-52 border-2 border-[#bbff46] rounded-full shadow-2xl" src={copyOfData.image} alt={data.name} />
                         }
                     </div>
                 </label>
@@ -73,28 +73,3 @@ export default function UserForm() {
         </>
     )
 }
-
-/**
- * <div className="w-full h-screen bg-white rounded-3xl p-4">
-                <section className="flex items-center">
-                    <label className="cursor-pointer">
-                        <input type="file" accept="image" className="hidden" onChange={(e) => handleImageChange(e)} />
-                        <div className="w-fit h-fit flex flex-col items-center justify-center text-center">
-                            {
-                                loading === "image" ? <Loading className="w-32 h-32 xl:w-60 xl:h-52 border-4 border-amber-400 rounded-full" type="small" message="" />
-                                    :
-                                <img className="w-32 object-cover object-center h-32 xl:w-60 xl:h-52 border-4 border-black rounded-full shadow-2xl" src={copyOfData.image} alt={data.name} />
-                            }
-                        </div>
-                    </label>
-                    <div className="flex flex-col gap-2 justify-center">
-                        <Button>Pick an image</Button>
-                        <Button>Remove image</Button>
-                    </div>
-                </section>
-                <h1 className="text-6xl font-bold tracking-tighter m-4">{Capitalize(data.name)}</h1>
-            </div>
-
-
- * 
- */

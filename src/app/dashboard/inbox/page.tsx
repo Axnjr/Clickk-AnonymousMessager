@@ -1,14 +1,14 @@
 "use client";
-import { useEffect, useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs"
-import { pusherClient } from "../../../../backendLib/pusher";
+import { useDataFromUserContext } from "@/hooks/useDataFromUserContext";
 import { MessagesType } from "../../../../types/all-required-types";
-import { Fetcher } from "../../../lib/utils";
-import MapMessage from "@/components/dashboard/MapMessage";
+import { useEffect, useState } from "react"
 import { InfoCircledIcon, LockClosedIcon } from "@radix-ui/react-icons";
+import { pusherClient } from "../../../../backendLib/pusher";
+import MapMessage from "@/components/dashboard/MapMessage";
 import Advertisement from "@/components/Advertisement";
 import useOrSetSearchParams from "@/hooks/useOrSetSearchParams";
-import { useDataFromUserContext } from "@/hooks/useDataFromUserContext";
+import { trpc } from "@/app/_trpcClinetUsageLib/client"
 
 // useEffect(() => {
 //     // @ts-ignore
@@ -22,24 +22,21 @@ import { useDataFromUserContext } from "@/hooks/useDataFromUserContext";
 // function messageHandler(mes: any) { setMessages(prev => [...prev, mes]) }
 // });
 
-export default function InboxPage() {
-    
+export default function InboxPage() {   
     const [id,skipp] = useOrSetSearchParams()
     const membership = useDataFromUserContext("membership")
     const [messages, setMessages] = useState<MessagesType[]>([])
-    const [loading, setLoading] = useState(true)
-    const [skip, setSkip] = useState(skipp ? skipp : 0)
-    const [total, setTotal] = useState(0)
+    const [skip, setSkip] = useState<string | null>(skipp ? skipp : "0")
+    const [total, setTotal] = useState(0) // @ts-ignore
+    const { data, isLoading } = trpc.getMessages.useQuery({ userId:id, skip:skip })
 
-    useEffect(() => {
-        (async () => {
-            setLoading(true)
-            let t = await Fetcher(`/api/queryMessages?userId=${id}&skip=${skip}`)
-            setTotal(t.count)
-            setMessages(prev => [...prev, ...t.data])
-            setLoading(false)
-        })();
-    }, [skip])
+    useEffect(() => { //@ts-ignore
+        if(data) { 
+            const temp = JSON.parse(data)
+            setMessages(prev => [...prev,...temp.data]) 
+            setTotal(prev => temp.count)
+        }
+    }, [data])
 
     return (
         <>
@@ -58,19 +55,19 @@ export default function InboxPage() {
                                 icon={<LockClosedIcon/>}
                             />
                         }
-                        <button onClick={() => setSkip(messages.length)} className="mr-3 ml-1 text-sm font-medium px-3 rounded-2xl">Load more</button>
+                        <button onClick={() => setSkip(prev => `${messages.length}`)} className="mr-3 ml-1 text-sm font-medium px-3 rounded-2xl">Load more</button>
                     </TabsList>
                     <TabsContent className="relative rounded-2xl z-0 w-[96%] m-auto text-black" value="text">
-                        <MapMessage messageType={["ok","neutral","unchecked"]} messages={messages} loading={loading} />
+                        <MapMessage messageType={["ok","neutral","unchecked"]} messages={messages} loading={isLoading} />
                     </TabsContent>
                     <TabsContent className="relative rounded-3xl z-0 w-[96%] m-auto text-black" value="spam">
-                        <MapMessage messageType={["negative"]} messages={messages} loading={loading} />
+                        <MapMessage messageType={["negative"]} messages={messages} loading={isLoading} />
                     </TabsContent>
                     <TabsContent className="relative rounded-2xl z-0 w-[96%] m-auto text-black" value="voice">
-                        <MapMessage messageType={["voice"]} messages={messages} loading={loading} />
+                        <MapMessage messageType={["voice"]} messages={messages} loading={isLoading} />
                     </TabsContent>
                 </Tabs>
-                <p style={{display:loading ? "none" : "flex"}} className="mt-12 px-2 text-[#d4ff00] bg-black rounded-xl p-1 mb-8 text-sm font-medium tracking-tight flex items-center justify-start text-left">
+                <p style={{display:isLoading ? "none" : "flex"}} className="mt-12 px-2 text-[#d4ff00] bg-black rounded-xl p-1 mb-8 text-sm font-medium tracking-tight flex items-center justify-start text-left">
                     <InfoCircledIcon className="mr-2" />All messages delete automatically within 24 hrs after being read.
                 </p>
             </div>

@@ -75,4 +75,13 @@ export interface pageProps {
   searchParams?: { [key: string]: string | string[] | undefined }
 }
 
+export interface userAnalytics {
+  id:string,
+  page_views?:string,
+  page_clicks?:string,
+  responses?:string,
+  spam?:string,
+  userId:string
+}
+
 // [key: string]: string -> for all string type
