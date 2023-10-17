@@ -1,11 +1,11 @@
 "use client"
 import { Button } from "@/components/ui/Button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/Dialog"
-import { Fetcher } from "../lib/utils"
+import { Fetcher } from "../../lib/utils"
 import { useState } from "react"
 import { useAllDataFromUserContext } from "@/hooks/useDataFromUserContext"
-import { userType } from "../../types/all-required-types"
-import { trpc } from "@/app/_trpcClinetUsageLib/client"
+import { userType } from "../../../types/all-required-types"
+import { trpc } from "@/app/_trpcUsageLib/client"
 
 export default function SendTextMessage() {
     const data : userType = useAllDataFromUserContext()

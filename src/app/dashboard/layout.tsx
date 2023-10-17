@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import DashboardNavbar from '@/components/dashboard/DashboardNavbar'
 import { Suspense } from "react";
 import Loading from '@/app/loading';
-import { GetUserDetails } from '../../lib/utils';
+import { GetUserDetails } from '../../lib/dataHelpers';
 import { redirect } from 'next/navigation';
 import { DashboardWrapper } from '@/components/dashboard/DashboardWrapper';
 

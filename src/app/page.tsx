@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/Button";
 import { useSession, signIn } from "next-auth/react"
-import { trpc } from "@/app/_trpcClinetUsageLib/client"
+import { trpc } from "@/app/_trpcUsageLib/client"
 
 export default function page() {
 	const { data: session, status } = useSession()

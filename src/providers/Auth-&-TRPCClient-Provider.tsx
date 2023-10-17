@@ -1,7 +1,7 @@
 "use client"
 import { SessionProvider } from "next-auth/react"
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { trpc } from '@/app/_trpcClinetUsageLib/client'
+import { trpc } from '@/app/_trpcUsageLib/client'
 import { httpBatchLink } from '@trpc/client'
 import { useState } from "react";
 import { getSiteURL } from "@/lib/utils";

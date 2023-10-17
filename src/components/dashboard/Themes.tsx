@@ -1,5 +1,6 @@
 "use client"
-import { IntitiateUpdate, cn } from "../../lib/utils"
+import { cn } from "../../lib/utils"
+import { IntitiateUpdate } from "@/lib/dataHelpers"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from "react"
 import { Button } from "../ui/Button"
@@ -40,7 +41,7 @@ export default function Themes() {
     }
 
     return (
-        <div className="m-auto w-full flex flex-col gap-2 items-center p-12 bg-white rounded-3xl">
+        <div className="m-auto w-full flex flex-col gap-2 items-center p-12 bg-white/50 backdrop-blur-sm rounded-3xl">
             <div className="mt-2 mb-10 text-center">
                 <p className="text-6xl font-semibold tracking-tighter">Themes</p>
                 <p className="text-xs m-4 font-normal flex items-center"><InfoCircledIcon />&nbsp; Changes you make wont be applied unless you save your changes</p>
@@ -68,7 +69,7 @@ export default function Themes() {
                         </section>
                     })
                 }
-                <section className="pt-12 mt-12 w-full flex items-center gap-2 justify-center border-t-2">
+                <section className="pt-12 mt-12 w-full flex items-center gap-2 justify-center border-t-4 border-white">
                     <input type="color" className="style1 w-14 h-14" value={GetColorsOutOfString("bg") as string}
                     onChange={(e) => setUserBg(`bg-[${e.target.value}] text-[${GetColorsOutOfString("col")}]`)} />
                     <p className="text-center text-sm xl:text-lg font-semibold">Bg color</p>

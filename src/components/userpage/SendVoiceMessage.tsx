@@ -3,9 +3,9 @@ import { useState, useRef } from 'react';
 import { Button } from "@/components/ui/Button"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/Dialog"
 import Loading from '@/app/loading';
-import { UploadToFirebase } from '../lib/firebaseCdnHelper';
+import { UploadToFirebase } from '../../lib/firebaseCdnHelper';
 import { useAllDataFromUserContext } from '@/hooks/useDataFromUserContext';
-import { trpc } from "@/app/_trpcClinetUsageLib/client"
+import { trpc } from "@/app/_trpcUsageLib/client"
 
 export default function SendVoiceMessage() {
 

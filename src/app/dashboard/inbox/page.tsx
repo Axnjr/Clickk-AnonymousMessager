@@ -8,7 +8,7 @@ import { pusherClient } from "../../../../backendLib/pusher";
 import MapMessage from "@/components/dashboard/MapMessage";
 import Advertisement from "@/components/Advertisement";
 import useOrSetSearchParams from "@/hooks/useOrSetSearchParams";
-import { trpc } from "@/app/_trpcClinetUsageLib/client"
+import { trpc } from "@/app/_trpcUsageLib/client"
 
 // useEffect(() => {
 //     // @ts-ignore
@@ -40,8 +40,8 @@ export default function InboxPage() {
 
     return (
         <>
-            <div className="flex flex-col items-center justify-center pb-12 ">
-                <Tabs defaultValue={"text"} className="w-screen h-full mt-8 block">
+            <div className="flex flex-col items-center justify-center pb-12">
+                <Tabs defaultValue={"text"} className="w-screen h-full mt-12 block">
                     <TabsList className="fixed z-50 bottom-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-fit h-12 text-black bg-white">
                         <TabsTrigger className="ml-3 mr-1 px-3" value="text">Your Inbox {total}</TabsTrigger>
                         <TabsTrigger className="mx-1 px-3" value="spam">Spam</TabsTrigger>
@@ -67,7 +67,7 @@ export default function InboxPage() {
                         <MapMessage messageType={["voice"]} messages={messages} loading={isLoading} />
                     </TabsContent>
                 </Tabs>
-                <p style={{display:isLoading ? "none" : "flex"}} className="mt-12 px-2 text-[#d4ff00] bg-black rounded-xl p-1 mb-8 text-sm font-medium tracking-tight flex items-center justify-start text-left">
+                <p style={{display:isLoading ? "none" : "flex"}} className="mt-12 px-2 rounded-xl p-1 mb-8 text-xs font-medium tracking-tight flex items-center justify-start text-left">
                     <InfoCircledIcon className="mr-2" />All messages delete automatically within 24 hrs after being read.
                 </p>
             </div>

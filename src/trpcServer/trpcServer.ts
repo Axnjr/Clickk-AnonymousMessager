@@ -1,5 +1,5 @@
 import { initTRPC, TRPCError } from "@trpc/server";
-import { GetDetails } from "@/lib/utils";
+import { GetDetails } from "@/lib/dataHelpers";
 
 const t = initTRPC.create();
 const middleware = t.middleware

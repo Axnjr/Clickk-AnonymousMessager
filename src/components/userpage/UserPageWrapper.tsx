@@ -1,9 +1,9 @@
 "use client";
-import SendTextMessage from "@/components/SendTextMessage"
-import SendVoiceMessage from "@/components/SendVoiceMessage"
+import SendTextMessage from "@/components/userpage/SendTextMessage"
+import SendVoiceMessage from "@/components/userpage/SendVoiceMessage"
 import { userType } from "../../../types/all-required-types"
 import { DataContext } from "@/providers/FetchedDataProvider";
-import { trpc } from "@/app/_trpcClinetUsageLib/client";
+import { trpc } from "@/app/_trpcUsageLib/client";
 
 export default function UserPageWrapper({ data } : { data : userType }) {
 

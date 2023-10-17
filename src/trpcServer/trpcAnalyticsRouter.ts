@@ -1,7 +1,7 @@
 import { router, privateProcedure } from "./trpcServer";
 import { prismaDB } from "../../backendLib/prismaDb";
 
-export const analyticsRouter = router({
+export const userDataRouter = router({
     getAnalytics: privateProcedure.query(async ({ ctx }) => {
 		const userID = ctx.userId
 		return JSON.stringify( await prismaDB.userAnalytics.findMany({ where : { userId : userID } }) )
@@ -18,5 +18,7 @@ export const analyticsRouter = router({
             })
         } catch (error) {  }
 		return "ok"
-	})
+	}),
+
+	// ~ ------------------------------------------------------------------------------------------------ ~ //
 })

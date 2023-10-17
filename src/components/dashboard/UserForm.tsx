@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/Button"
 import { UploadToFirebase, DeleteFromFirebase } from "../../lib/firebaseCdnHelper"
-import { Capitalize, IntitiateUpdate } from "../../lib/utils"
+import { IntitiateUpdate } from "../../lib/dataHelpers"
 import { toast } from "@/components/ui/use-toast"
 import Loading from "@/app/loading"
 import { ToastAction } from "@/components/ui/toast"
@@ -44,7 +44,8 @@ export default function UserForm() {
 
     return (
         <>
-            <section className="w-full h-fit rounded-3xl pt-4 pb-8 flex flex-col items-center justify-center gap-2 bg-white">
+            <section className="w-full h-fit rounded-3xl pt-4 pb-8 flex flex-col items-center justify-center
+            gap-2 bg-white/50 backdrop-blur-sm">
                 <label className="cursor-pointer">
                     <input type="file" accept="image" className="hidden" onChange={(e) => handleImageChange(e)} />
                     <div className="w-fit h-fit flex flex-col items-center justify-center text-center">
@@ -55,7 +56,7 @@ export default function UserForm() {
                         }
                     </div>
                 </label>
-                <h1 className="text-7xl font-bold tracking-tighter m-4">{Capitalize(data.name)}</h1>
+                <h1 className="text-7xl font-bold tracking-tighter m-4 capitalize">{data.name}</h1>
                 <textarea id="ques" className="w-10/12 overflow-y-hidden h-14 max-h-fit xl:h-28 font-medium text-lg border xl:text-2xl bg-white p-4 xl:p-8 rounded-2xl placeholder:text-neutral-700 text-center"
                     value={copyOfData.question ? copyOfData.question : "Your note : Send me a annoymous message 🤟"}
                     onChange={(e) => {
