@@ -4,7 +4,7 @@ import { useDataFromUserContext } from "@/hooks/useDataFromUserContext";
 import { MessagesType } from "../../../../types/all-required-types";
 import { useEffect, useState } from "react"
 import { InfoCircledIcon, LockClosedIcon } from "@radix-ui/react-icons";
-import { pusherClient } from "../../../../backendLib/pusher";
+import { pusherClient } from "../../../../../backendLib/pusher";
 import MapMessage from "@/components/dashboard/MapMessage";
 import Advertisement from "@/components/Advertisement";
 import useOrSetSearchParams from "@/hooks/useOrSetSearchParams";

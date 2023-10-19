@@ -1,4 +1,4 @@
-import { prismaDB } from "../../backendLib/prismaDb"
+import { prismaDB } from "../../../backendLib/prismaDb"
 import getSession from "./getSession"
 import { createClient } from "redis"
 import colors from "colors";

@@ -1,5 +1,5 @@
 import { router, privateProcedure } from "./trpcServer";
-import { prismaDB } from "../../backendLib/prismaDb";
+import { prismaDB } from "../../../backendLib/prismaDb";
 import { ClassifyMessage } from "@/lib/utils";
 import { z } from "zod"
 

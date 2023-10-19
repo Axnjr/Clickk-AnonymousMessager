@@ -1,7 +1,7 @@
 "use client";
 import { notFound } from "next/navigation";
 import { pageProps, userType } from "../../../../types/all-required-types";
-import { prismaDB } from "../../../../backendLib/prismaDb";
+import { prismaDB } from "../../../../../backendLib/prismaDb";
 import getStripe from "@/lib/getStripe";
 import { Button } from "@/components/ui/Button";
 import { Fetcher } from "@/lib/utils";

@@ -1,5 +1,5 @@
 import { router, privateProcedure } from "./trpcServer";
-import { prismaDB } from "../../backendLib/prismaDb";
+import { prismaDB } from "../../../backendLib/prismaDb";
 import { z } from "zod"
 import { createClient } from "redis"
 import { getCachingURL } from "@/lib/utils";

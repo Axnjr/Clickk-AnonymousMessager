@@ -2,7 +2,7 @@ import getStripe from "../../../lib/getStripe"
 import { NextResponse, NextRequest } from "next/server";
 import { GetDetails } from "@/lib/dataHelpers";
 import colors from "colors";
-import { prismaDB } from "../../../../backendLib/prismaDb";
+import { prismaDB } from "../../../../../backendLib/prismaDb";
 
 export async function GET(request: NextRequest) {
     const stripe = getStripe(),

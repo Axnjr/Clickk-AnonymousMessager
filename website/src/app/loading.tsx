@@ -54,7 +54,7 @@ export default function Loading({ type, className, message, }
 				</div>
 			}
 			{
-				type === "big" && <div className={cn("bg-red-500 absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 w-screen h-screen z-50 flex flex-col items-center justify-center", className)}>
+				type === "big" && <div className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-1/2 w-screen h-screen z-50 flex flex-col items-center justify-center", className)}>
 					<svg className="animate-spin w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38">
 						<defs>
 							<linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">

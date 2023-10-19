@@ -1,4 +1,4 @@
-import { prismaDB } from '../../../../../backendLib/prismaDb'
+import { prismaDB } from '../../../../../../backendLib/prismaDb'
 import Cors from "micro-cors";
 import getStripe from '@/lib/getStripe'
 import colors from "colors";

@@ -47,10 +47,11 @@ export default function UserStats() {
                                                         {membership ? (data.length > 0 ? data[0][ele.prop] : 0) : <LockClosedIcon className="mt-2"/>}
                                                     </span>
                                                 }
+                                                {/* Below line shows responses and spam count which do not require divine membership */}
                                                 {!ele.membershipReq && <span>{data.length > 0 ? data[0][ele.prop] : 0}</span>}
                                             </div>
                                         </TooltipTrigger>
-                                        <TooltipContent>{ele.membershipReq && membership == "divine" ? "Go divine for detailed analysis" : `${ele.name}`}</TooltipContent>
+                                        <TooltipContent>{ele.membershipReq && !membership ? "Go divine for detailed analysis" : `${ele.name}`}</TooltipContent>
                                     </Tooltip>
                               </TooltipProvider>
                             })

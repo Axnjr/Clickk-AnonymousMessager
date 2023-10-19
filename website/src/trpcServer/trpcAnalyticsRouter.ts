@@ -1,5 +1,5 @@
 import { router, privateProcedure } from "./trpcServer";
-import { prismaDB } from "../../backendLib/prismaDb";
+import { prismaDB } from "../../../backendLib/prismaDb";
 
 export const userDataRouter = router({
     getAnalytics: privateProcedure.query(async ({ ctx }) => {
