@@ -41,7 +41,9 @@ export default async function DashboardNavbar() {
                     <Button className="font-bold text-md tracking-tight xl:text-xl">
                         <Share2Icon className='mr-1 ml-0' /> Share
                     </Button>
-                    <Button variant="fancy" className="font-medium ml-2 mr-4 text-md tracking-tight rounded-lg px-4 py-1">Go divine ✨</Button>
+                    <Button variant="fancy" className="font-medium ml-2 mr-4 text-md tracking-tight rounded-lg px-4 py-1">
+                        <Link href={"/plans"}>Go divine ✨</Link>
+                    </Button>
                     <Profile ProfileImage={user.image} />
                 </div>
             </section>

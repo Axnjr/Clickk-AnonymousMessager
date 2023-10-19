@@ -7,13 +7,15 @@ import {
     DialogTrigger,
 } from "@/components/ui/Dialog"
 import { Button } from "./ui/Button";
-import { GoDivine } from "@/lib/stripeGateway";
+import Link from "next/link";
+// import { GoDivine } from "@/lib/stripeGateway";
 
 const divine_features = [
     "Voice messages.",
     "Spam and toxic message detection.",
     "More page customizability.",
-    "No auto deleting messages"
+    "No auto deleting messages",
+    "Hints about each message"
 ]
 
 export default function Advertisement({ message, trigger, icon }: { message: string, trigger: string, icon?: React.ReactNode }) {
@@ -26,8 +28,10 @@ export default function Advertisement({ message, trigger, icon }: { message: str
                 <DialogHeader className="mt-6">
                     <DialogTitle className="mb-2 text-base font-bold text-center">{message}</DialogTitle>
                     <img className="w-full h-full my-2" src="https://mfe-billing.production.linktr.ee/images/free-trial-banner-default.6947d5f1ec809ab89cc8.png" alt="" />
-                    <h1 className="text-xl px-6 my-2 tracking-tighter font-black text-black">Get 7 days of Divine plan for free. Cancel anytime !</h1>
-                    <ul className="m-auto text-center px-6 py-2">
+                    <br/>
+                    {/* <h1 className="text-xl text-center my-2 tracking-tighter font-semibold text-black">Get 7 days of Divine plan for free. Cancel anytime !</h1> */}
+                    {/* <br/> */}
+                    <ul className='rounded-xl border-neutral-400 border p-2 m-auto w-10/12'>
                         {
                             divine_features.map((ele, id) => {
                                 return <li key={id} className="flex text-base items-center m-2 font-normal">
@@ -40,17 +44,21 @@ export default function Advertisement({ message, trigger, icon }: { message: str
                             })
                         }
                     </ul>
+                    <br/>
                 </DialogHeader>
-                <Button onClick={() => {
-                    GoDivine({
-                        lineItems: [{
-                            price: "price_1O1PH3SC47g7m6OhxkZvpUe2",
-                            quantity: 1
-                        }]
-                    })
-                }} variant="normal" className="w-11/12 m-auto">Try Divine for free</Button>
-                <Button variant="normal" className="w-11/12 m-auto mb-8">View all plans</Button>
+                <Button variant="normal" className="w-11/12 m-auto mb-8">
+                    <Link href={"/plans"}>View all plans</Link>
+                </Button>
             </DialogContent>
         </Dialog>
     )
 }
+
+{/* <Button onClick={() => {
+    // GoDivine({
+    //     lineItems: [{
+    //         price: "price_1O1PH3SC47g7m6OhxkZvpUe2",
+    //         quantity: 1
+    //     }]
+    // })
+}} variant="normal" className="w-11/12 m-auto">Try Divine for free</Button> */}

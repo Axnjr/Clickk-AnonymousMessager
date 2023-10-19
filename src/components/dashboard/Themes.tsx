@@ -1,6 +1,5 @@
 "use client"
 import { cn } from "../../lib/utils"
-import { IntitiateUpdate } from "@/lib/dataHelpers"
 import { Checkbox } from "@/components/ui/checkbox"
 import { useState } from "react"
 import { Button } from "../ui/Button"
@@ -9,13 +8,30 @@ import { ToastAction } from "@/components/ui/toast"
 import { InfoCircledIcon, LockClosedIcon } from "@radix-ui/react-icons";
 import { useAllDataFromUserContext } from "@/hooks/useDataFromUserContext"
 import { themes } from "./ArraysToBeMapped"
+import { trpc } from "@/app/_trpcUsageLib/client"
 
 export default function Themes() {
+
     const data = useAllDataFromUserContext()
     const membership = data.membership
     const [userBg, setUserBg] = useState(data.backgroundStyles as string) // "bg-white text-black"
     const [loading, setLoading] = useState(false)
     const { toast } = useToast()
+
+    const { mutate : updateUser } = trpc.updateUser.useMutation({
+        onSuccess: () => {
+            toast({
+                title: "Your new theme saved succesfully ✨🤟",
+                action: <ToastAction altText="Great!!"><a href={`/${data.name}`}>Go to your page</a></ToastAction>
+            })
+        },
+        onError: () => {
+            toast({
+                title: "Dang it! Unable save changes, something went wrong 😑☠️",
+                variant: "destructive"
+            })
+        }
+    })
 
     function GetColorsOutOfString(what: "bg" | "col", theme?:string) {
         if(!theme) { theme = userBg }
@@ -25,18 +41,13 @@ export default function Themes() {
 
     async function UpdateTheme() {
         setLoading(true)
-        var dataToBeUpdated;
-        await IntitiateUpdate(data.name, "theme", userBg)
-            .then(() => toast({
-                title: "Your new theme saved succesfully ✨🤟",
-                action: <ToastAction altText="Great!!"><a href={`/${data.name}`}>Go to your page</a></ToastAction>
-            }))
-            .catch(() => {
-                toast({
-                    title: "Dang it! Unable save changes, something went wrong 😑☠️",
-                    variant: "destructive"
-                })
-            })
+        updateUser({
+            username : data.name,
+            what : "theme",
+            json : {
+                data:userBg
+            }
+        })
         setLoading(false)
     }
 
@@ -54,7 +65,7 @@ export default function Themes() {
                 </section>
                 {
                     themes.map((theme, id) => {
-                        let d =(membership != "divine" && theme.type == "normal") ? false : true;
+                        let d =(!membership && theme.type == "normal") ? false : true;
                         return <section  style={{opacity:d ? "0.6" : "1"}} key={id} className="relative">
                             <Checkbox className={cn(`w-40 h-52 rounded-xl border-2
                                 border-neutral-400 flex items-center justify-center`, theme.bg)}

@@ -46,7 +46,9 @@ export type userType = {
   backgroundStyles:"",
   buttonStyles:""
   question : string,
-  membership?:string,
+  membership? : null | "Divine Plan - Annually" | "Divine Plan - Monthly",
+  membershipStartDate? : string,
+  membershipEndDate? : string,
   image : string, 
 }
 

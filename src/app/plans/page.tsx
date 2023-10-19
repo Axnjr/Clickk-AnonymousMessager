@@ -4,15 +4,34 @@ import { ChevronRightIcon, CheckIcon } from '@radix-ui/react-icons'
 import { trpc } from '../_trpcUsageLib/client';
 import { useEffect, useState } from 'react';
 import Loading from '../loading';
-import { redirect } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from '@/components/ui/toast';
 
-export default  function page() {
+export default function PlansPage() {
 
+    const sp = useSearchParams()
     const { data, isLoading } = trpc.getPlans.useQuery()
+    const { data: uid } = trpc.getUser.useQuery()
+    const [state,setState] = useState<null | string>(sp?.get("error"))
+    const { toast } = useToast()
 
-    async function HandlePayment(id:string){
+    useEffect(() => {
+        console.log(state)
+        if(state == "true"){
+            toast({
+                title: "Payment unsuccesfull! something went wrong can you try again pls 😓🙏",
+                action:<ToastAction altText='Ok, never mind'>Ok, never mind</ToastAction>,
+                variant:"destructive",
+                defaultOpen:true
+            })
+        }
+    }, [])
+
+    async function HandlePayment(id:string,name:string){
+        setState("loading")
         console.log("Processing payment")
-        let t = await (await fetch(`/api/payments?planID=${id}`)).json()
+        let t = await (await fetch(`/api/payments?planID=${id}&planName=${name}&uid=${uid}`)).json()
         window.location.assign(t.URL)
     }
 
@@ -35,11 +54,11 @@ export default  function page() {
                 <div className='flex flex-wrap items-center justify-center'>
                 {
                     JSON.parse(data).map((plan: any, id: number) => {
-                        return <div key={id} className='w-1/3 m-2 h-fit rounded-2xl bg-white text-black
+                        return <div key={id} className='w-96 m-2 h-fit rounded-2xl bg-white text-black
                         border-4 shadow-2xl mb-12 hover:border-black
                         flex flex-col items-start p-6'>
                             <h1 className='text-xl tracking-tighter font-bold'>{plan.nickname}</h1>
-                            <h1 className='text-4xl font-black tracking-tighter mt-1 '>${plan.unit_amount / 100}</h1>
+                            <h1 className='text-4xl font-black tracking-tighter mt-1 '>₹{plan.unit_amount / 100}</h1>
                             <p className='text-sm mt-4 text-neutral-400 font-normal'>During this phase the design is developed to meet the required technical standards to</p>
                             <br />
                             <ul className='rounded-xl border-neutral-400 border p-2 m-auto'>
@@ -56,9 +75,13 @@ export default  function page() {
                             </ul>
                             <Button variant="normal" className='w-full m-auto my-4 justify-between'
                                 onClick={() => {
-                                    HandlePayment(plan.id)
+                                    HandlePayment(plan.id, plan.nickname)
                                 }}>
-                                Get Plan <ChevronRightIcon />
+                                {
+                                    state == "loading" ? "Redirecting ..."
+                                        :
+                                    <>Get Plan <ChevronRightIcon /></>
+                                }
                             </Button>
                         </div>
                     })

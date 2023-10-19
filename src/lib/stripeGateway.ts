@@ -1,6 +1,6 @@
 import { Stripe, loadStripe } from "@stripe/stripe-js"
 
-export async function GoDivine({lineItems} : {lineItems : any}) {
+export async function GoDivine({ lineItems } : { lineItems : any }) {
 
     console.log("CAME TO PAYMENTS ")
 
@@ -15,7 +15,7 @@ export async function GoDivine({lineItems} : {lineItems : any}) {
     const stripe = await getstripe()
     //@ts-ignore
     await stripe.redirectToCheckout({
-        mode:"payment",
+        mode:"subscription",
         lineItems,
         successUrl: `${window.location.origin}?session_id={CHECKOUT_SESSION_ID}`,
 		cancelUrl: window.location.origin

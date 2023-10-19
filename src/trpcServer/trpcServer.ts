@@ -1,4 +1,4 @@
-import { initTRPC, TRPCError } from "@trpc/server";
+import { initTRPC, TRPCError, inferRouterOutputs } from "@trpc/server";
 import { GetDetails } from "@/lib/dataHelpers";
 
 const t = initTRPC.create();

@@ -41,18 +41,29 @@ model User {
   name          String?   @unique
   email         String?   @unique
   emailVerified DateTime?
+  question      String?
+  image         String?
 
   backgroundStyles String? @default("bg-[#ffffff] text-[#000000]")
   buttonStyles     String? @default("")
 
-  messages     Messages[]
-  question     String?
-  membership   String?    // ( "normal" || null ) || "divine"
+  membership    String?
 
-  image         String?
+  messages      Messages[]
   accounts      Account[]
   sessions      Session[]
   UserAnalytics UserAnalytics[]
+  UserMembership UserMembership[]
+}
+
+model UserMembership {
+  id                  String  @unique @default(cuid())
+  membership          String? // null || "Divine Plan - Annually"  || "Divine Plan - Monthly"
+  membershipStartDate String? // "18/02/2023"
+  membershipEndDate   String? // "18/03/2023"
+  paymentIntent       String?
+  User        User   @relation(fields: [userId], references: [id])
+  userId      String @unique
 }
 
 model UserAnalytics {
