@@ -1,0 +1,96 @@
+// // Models : Account, User, Session, VerificationToken copied as it is from next-auth docs .
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?   @unique
+  email         String?   @unique
+  emailVerified DateTime?
+  question      String?
+  image         String?
+
+  backgroundStyles String? @default("bg-[#ffffff] text-[#000000]")
+  buttonStyles     String? @default("")
+
+  membership    String?
+
+  messages      Messages[]
+  accounts      Account[]
+  sessions      Session[]
+  UserAnalytics UserAnalytics[]
+  UserMembership UserMembership[]
+}
+
+model UserMembership {
+  id                  String  @unique @default(cuid())
+  membership          String? // null || "Divine Plan - Annually"  || "Divine Plan - Monthly"
+  membershipStartDate String? // "18/02/2023"
+  membershipEndDate   String? // "18/03/2023"
+  paymentIntent       String?
+  User        User   @relation(fields: [userId], references: [id])
+  userId      String @unique
+}
+
+model UserAnalytics {
+  id          String @unique @default(cuid())
+  page_views  Int?   @default(0)
+  page_clicks Int?   @default(0)
+  responses   Int?   @default(0)
+  spam        Int?   @default(0)
+  User        User   @relation(fields: [userId], references: [id])
+  userId      String @unique
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Messages {
+  id                String  @id @default(cuid())
+  status            String?
+  timestamp         String?
+  text_message      String?
+  type              String?
+  voice_message_url String?
+  User              User    @relation(fields: [userId], references: [id])
+  userId            String
+}
