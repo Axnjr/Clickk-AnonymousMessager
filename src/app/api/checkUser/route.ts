@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prismaDB } from "@/lib/prismaDb";
+import { prismaDB } from "../../../../backendLib/prismaDb";
 
 export async function GET(request: NextRequest) {
     const req = request?.nextUrl?.searchParams?.get("name")?.replace(/["\\/]/g, '')

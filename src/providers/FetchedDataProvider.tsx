@@ -1,5 +1,5 @@
 "use client";
-import { userType } from "@/types/all-required-types";
+import { userType } from "../../types/all-required-types";
 import { createContext } from "react";
 
 type DataContextType = {
@@ -12,7 +12,7 @@ export const DataContext = createContext<DataContextType>({
         id:"",
         name:"",
         question:"",
-        extra_param1:"",
+        membership:"",
         image:"",
         backgroundStyles:"",
         buttonStyles:""

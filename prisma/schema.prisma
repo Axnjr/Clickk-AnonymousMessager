@@ -42,14 +42,12 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
 
-  backgroundStyles String? @default("bg-white text-black")
+  backgroundStyles String? @default("bg-[#ffffff] text-[#000000]")
   buttonStyles     String? @default("")
 
   messages     Messages[]
   question     String?
-  responseType String?    @default("text_only")
-  // extra_param1      String?   @default("0,0,0,0")
-  // "views:clicks:responses"
+  membership   String?    // ( "normal" || null ) || "divine"
 
   image         String?
   accounts      Account[]

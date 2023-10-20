@@ -38,7 +38,7 @@ export type NextApiResponseServerIO = NextApiResponse & {
 }
  */
 
-export interface userType {
+export type userType = {
   id : string,
   name : string,
   email?:string,
@@ -46,8 +46,7 @@ export interface userType {
   backgroundStyles:"",
   buttonStyles:""
   question : string,
-  responseType?:string,
-  extra_param1 : string,
+  membership?:string,
   image : string, 
 }
 
@@ -69,6 +68,11 @@ export interface MessagesType {
   type?:string,
   voice_message_url?:string | null,
   userId?:string
+}
+
+export interface pageProps {
+  params: { user: string }
+  searchParams?: { [key: string]: string | string[] | undefined }
 }
 
 // [key: string]: string -> for all string type

@@ -84,6 +84,11 @@ audio {
   width: 75%;
 }
 
+.blur{
+  -webkit-filter: blur(2px);
+  filter: blur(2px);
+}
+
 audio::-webkit-media-controls-play-button,
 audio::-webkit-media-controls-panel {
   background-color: white;

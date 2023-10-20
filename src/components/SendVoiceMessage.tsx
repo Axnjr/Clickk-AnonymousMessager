@@ -1,15 +1,14 @@
 "use client";
-import { useState, useRef, useContext } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from "@/components/ui/Button"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/Dialog"
 import Loading from '@/app/loading';
-import { UploadToFirebase } from '@/lib/firebaseCdnHelper';
-import { Fetcher } from '@/lib/utils';
-import { DataContext } from "@/providers/FetchedDataProvider"
+import { UploadToFirebase } from '../lib/firebaseCdnHelper';
+import { useAllDataFromUserContext } from '@/hooks/useDataFromUserContext';
 
 export default function SendVoiceMessage() {
 
-    const { data } = useContext(DataContext)
+    const data = useAllDataFromUserContext()
     const [status, setStatus] = useState<"speaking" | "not_speaking" | "loading">("not_speaking");
     const [audioBlob, setAudioBlob] = useState<any | null>(null);
     const [success, setSuccess] = useState(false)

@@ -1,11 +1,12 @@
-import { Styles, UsersUpdatableProps, userType } from "@/types/all-required-types"
+import { Styles, UsersUpdatableProps, userType } from "../../types/all-required-types"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
-import { prismaDB } from "./prismaDb"
+import { prismaDB } from "../../backendLib/prismaDb"
 import getSession from "./getSession"
 import { createClient } from "redis"
 import path from "path"
-var colors = require('colors');
+import colors from "colors";
+import { cache } from "react"
 
 export async function Fetcher(
 	url: string, 
@@ -26,7 +27,12 @@ export async function Fetcher(
 	}
 }
 
-export async function GetUserDetails() {
+export const GetUserDetails = cache(async () => {
+	console.log(colors.bgWhite.black("CACHED USER DETAILS IN cache"))
+	return await GetDetails()
+})
+
+export async function GetDetails() {
 
 	// * WHILE WORKING ON CODESPACES SIGN-IN WONT WORK HENCE
 	// * COMMENTED OUT "getSession" SINCE IT WONT WORK AS WELL
@@ -86,14 +92,14 @@ export async function IntitiateUpdate(name: string, what: "theme" | "content", r
 				...req
 			})
 				:
-				JSON.stringify({ data: req })
+			JSON.stringify({ data: req })
 		})
 		return "ok"
 	}
 	catch (error) { return "not ok" }
 }
 
-function getCachingURL() {
+export function getCachingURL() {
 	if (process.env.NEXT_PUBLIC_REDIS_URL) {
 		return process.env.NEXT_PUBLIC_REDIS_URL
 		//"rediss://default:5115a67bfbdc4b1ea137cd4524b62178@civil-chow-43051.upstash.io:43051"
