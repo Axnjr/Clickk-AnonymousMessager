@@ -1,28 +1,33 @@
 "use client"
 import Loading from "@/app/loading"
 import { Button } from "@/components/ui/Button"
-import { Fetcher } from "../../lib/utils"
-import { useQuery } from "react-query"
+import { useState, useEffect } from "react"
 import { useDataFromUserContext } from "@/hooks/useDataFromUserContext"
 import { LockClosedIcon } from "@radix-ui/react-icons"
 import { buttonList } from "./ArraysToBeMapped"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, } from "@/components/ui/tooltip"
+import { trpc } from "@/app/_trpcUsageLib/client"
+import { userAnalytics } from "../../../types/all-required-types"
   
 function GetCTR(views: string, clicks: string) { return `~${Math.floor((Number(clicks) / Number(views)) * 100)}%` }
 
 export default function UserStats() {
-    const userID = useDataFromUserContext("id")
     const membership = useDataFromUserContext("membership")
-    const { data, isLoading, isError } = useQuery("data", async () => {
-        return await Fetcher(`/api/analytics?userId=${userID}`)
-    })
+    const [data,setData] = useState<userAnalytics[] | any>([])
+    const { data: analytics, isLoading, isError } = trpc.getAnalytics.useQuery()
 
+    useEffect(() => {
+        if(analytics){ 
+            setData([...JSON.parse(analytics)])
+        }
+    }, [analytics])
+    
     return (
         <>
         {
-            isError ? <p className="bg-white p-4 text-center my-6 rounded-3xl flex items-center justify-center">Unable to laod your page statistics try refreshing the page 😥</p>
+            isError ? <p className="bg-white/50 backdrop-blur-sm p-4 text-center my-6 rounded-3xl flex items-center justify-center">Unable to laod your page statistics try refreshing the page 😥</p>
                 :
-            <div className="p-6 xl:py-8 h-fit border bg-white w-full rounded-3xl text-center m-auto my-6">
+            <div className="p-6 xl:py-8 h-fit border bg-white/50 backdrop-blur-sm w-full rounded-3xl text-center m-auto my-6">
                 <h1 className="text-6xl font-semibold tracking-tighter mt-8 mb-12">Analysis</h1>
                 {isLoading && <Loading className="my-12" type="medium"/>}
                 {

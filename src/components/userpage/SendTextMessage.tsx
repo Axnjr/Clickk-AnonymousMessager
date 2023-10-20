@@ -1,25 +1,35 @@
 "use client"
 import { Button } from "@/components/ui/Button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/Dialog"
-import { Fetcher } from "../lib/utils"
+import { Fetcher } from "../../lib/utils"
 import { useState } from "react"
 import { useAllDataFromUserContext } from "@/hooks/useDataFromUserContext"
-import { userType } from "../../types/all-required-types"
+import { userType } from "../../../types/all-required-types"
+import { trpc } from "@/app/_trpcUsageLib/client"
 
 export default function SendTextMessage() {
     const data : userType = useAllDataFromUserContext()
     // const buttonCol = data.backgroundStyles.replace(/(\[|\]|bg-|text-)/g, '').split(" ")
     const [success, setSuccess] = useState(false)
     const [loading, setLoading] = useState(false)
+    const { mutate : postMessage } = trpc.postMessage.useMutation({
+        onSuccess: () => { 
+            setSuccess(true); 
+            setLoading(false);
+        },
+        onError: (err) => { console.log("Unable to send message something went wrong !!",err) }
+    })
 
     async function PostMessage(e: any) {
         e.preventDefault()
         setLoading(true)
         let mes = e.target[0].value
         if (e.target[0]) {
-            await Fetcher(`/api/queryMessages?message=${mes}&userId=${data.id}&type="text"`,"POST")
-            .then(() => { setSuccess(true) ; setLoading(false) })
-            .catch(() => { console.log("Unable to send message something went wrong !!") })
+            postMessage({ 
+                userId:data.id,
+                message:mes,
+                type:"text" 
+            })
         }
     }
 
@@ -38,6 +48,7 @@ export default function SendTextMessage() {
                                 <DialogTitle>Send me anonymous message</DialogTitle>
                                 <DialogDescription>Messages are enabled with toxicity & spam detection AI,<br /> be nice 🤗</DialogDescription>
                             </DialogHeader>
+                            
                             <form onSubmit={(e) => { PostMessage(e) }}>
                                 <textarea className="h-48 placeholder:text-neutral-600 focus:outline-none w-full bg-zinc-200/50 backdrop-blur-sm rounded-xl border p-4 font-medium text-lg"
                                     placeholder={data.question} />

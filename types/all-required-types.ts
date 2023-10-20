@@ -46,7 +46,9 @@ export type userType = {
   backgroundStyles:"",
   buttonStyles:""
   question : string,
-  membership?:string,
+  membership? : null | "Divine Plan - Annually" | "Divine Plan - Monthly",
+  membershipStartDate? : string,
+  membershipEndDate? : string,
   image : string, 
 }
 
@@ -73,6 +75,15 @@ export interface MessagesType {
 export interface pageProps {
   params: { user: string }
   searchParams?: { [key: string]: string | string[] | undefined }
+}
+
+export interface userAnalytics {
+  id:string,
+  page_views?:string,
+  page_clicks?:string,
+  responses?:string,
+  spam?:string,
+  userId:string
 }
 
 // [key: string]: string -> for all string type

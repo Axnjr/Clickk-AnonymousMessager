@@ -22,7 +22,8 @@ const buttonVariants = cva(
         link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
         fancy: "FancyCoolBeans",
         gentle:"hover:bg-neutral-100 text-stone-800 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
-        normal : "bg-black text-white hover:bg-transparent hover:border-2 hover:text-black border-black"
+        normal : "bg-black text-white hover:bg-transparent hover:border-2 hover:text-black border-black shadow-lg shadow-neutral-600",
+        normal2 : "bg-purple-600 text-black hover:bg-transparent hover:border-2 hover:text-white border-purple-600 shadow-lg shadow-neutral-600"
       },
       size: {
         default: "h-9 px-4 py-2",

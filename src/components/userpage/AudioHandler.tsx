@@ -1,8 +1,8 @@
 "use client";
 import { useState, useRef } from 'react';
-import { Button } from './ui/Button';
-import { UploadToFirebase } from '../lib/firebaseCdnHelper';
-import { Fetcher } from '../lib/utils';
+import { Button } from '../ui/Button';
+import { UploadToFirebase } from '../../lib/firebaseCdnHelper';
+import { Fetcher } from '../../lib/utils';
 
 export default function AudioRecorder({ user_id } : { user_id : string }) {
 	const [recording, setRecording] = useState(false);
