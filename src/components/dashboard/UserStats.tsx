@@ -25,9 +25,9 @@ export default function UserStats() {
     return (
         <>
         {
-            isError ? <p className="bg-white/50 backdrop-blur-sm p-4 text-center my-6 rounded-3xl flex items-center justify-center">Unable to laod your page statistics try refreshing the page 😥</p>
+            isError ? <p className="bg-white p-4 text-center my-6 rounded-3xl flex items-center justify-center">Unable to laod your page statistics try refreshing the page 😥</p>
                 :
-            <div className="p-6 xl:py-8 h-fit border bg-white/50 backdrop-blur-sm w-full rounded-3xl text-center m-auto my-6">
+            <div className="p-6 xl:py-8 h-fit border bg-white full rounded-3xl text-center m-auto my-6">
                 <h1 className="text-6xl font-semibold tracking-tighter mt-8 mb-12">Analysis</h1>
                 {isLoading && <Loading className="my-12" type="medium"/>}
                 {

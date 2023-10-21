@@ -6,10 +6,12 @@ import Profile from '@/components/Profile'
 import { useAllDataFromUserContext } from "@/hooks/useDataFromUserContext";
 
 export default async function DashboardNavbar() {
+
     const user = useAllDataFromUserContext()
+
     return (
-        <nav className=" w-[98%] m-auto bg-white/50 shadow-2xl border border-neutral-300 z-50
-            text-neutral-600 fixed top-2 left-1/2 -translate-x-1/2 flex flex-col justify-center
+        <nav className="w-[98%] max-w-[1450px] m-auto bg-white/50 shadow-2xl border border-neutral-300 z-50
+            text-neutral-600 fixed top-3 left-1/2 -translate-x-1/2 flex flex-col justify-center
             rounded-xl backdrop-blur-2xl">
             <section className="h-16 xl:h-20 flex items-center justify-between">
                 <div className='flex items-center ml-2'>
@@ -37,6 +39,7 @@ export default async function DashboardNavbar() {
                         </Button>
                     </div>
                 </div>
+
                 <div className="flex items-center mr-2">
                     <Button className="font-bold text-md tracking-tight xl:text-xl">
                         <Share2Icon className='mr-1 ml-0' /> Share
@@ -46,6 +49,7 @@ export default async function DashboardNavbar() {
                     </Button>
                     <Profile ProfileImage={user.image} />
                 </div>
+
             </section>
             {/* <section className="h-16 xl:h-20 md:hidden flex items-center justify-between">
                 <Button variant="gentle" className='font-semibold rounded-lg mx-1 text-md tracking-tight xl:text-xl'>

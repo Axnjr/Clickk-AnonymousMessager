@@ -52,7 +52,7 @@ export default function Themes() {
     }
 
     return (
-        <div className="m-auto w-full flex flex-col gap-2 items-center p-12 bg-white/50 backdrop-blur-sm rounded-3xl">
+        <div className="m-auto w-full flex flex-col gap-2 items-center p-12 bg-white rounded-3xl">
             <div className="mt-2 mb-10 text-center">
                 <p className="text-6xl font-semibold tracking-tighter">Themes</p>
                 <p className="text-xs m-4 font-normal flex items-center"><InfoCircledIcon />&nbsp; Changes you make wont be applied unless you save your changes</p>

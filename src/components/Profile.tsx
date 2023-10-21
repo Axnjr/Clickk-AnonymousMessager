@@ -27,8 +27,9 @@ export default function Profile({ ProfileImage } : { ProfileImage : string | nul
         <DropdownMenu.Root>
             <DropdownMenu.Trigger className='flex p-1 items-center mr-4 focus:outline-none border-2 border-black 
             rounded-full'>
-                <img className='w-8 h-8 object-cover object-center rounded-full'
-                src={ProfileImage ? ProfileImage : ""} alt={user ? user : ""}/>
+                {ProfileImage && <img className='w-8 h-8 object-cover object-center rounded-full'
+                src={ProfileImage} alt={user ? user : ""}/>}
+                {/* <div className='w-8 h-8 '></div> */}
             </DropdownMenu.Trigger>
 
             <DropdownMenu.Portal className='text-right z-50'>

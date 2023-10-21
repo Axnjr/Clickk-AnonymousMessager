@@ -40,15 +40,8 @@ body {
   overflow-x: hidden;
   height: fit-content;
   background-color: #f4f4f4;
-  /* background: rgb(199, 210, 254);
-  background: -moz-linear-gradient(263deg, rgba(199, 210, 254, 1) 0%, rgb(14, 0, 34) 100%);
-  background: -webkit-linear-gradient(263deg, rgba(199, 210, 254, 1) 0%, rgb(174, 0, 255) 100%);
-  background: linear-gradient(263deg, rgba(199, 210, 254, 1) 0%, rgb(171, 169, 169) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c7d2fe", endColorstr="#f1e6e6", GradientType=1); */
   transition: all 1s cubic-bezier(.4, 0, 1, 1);
 }
-
-
 
 .user_page {
   background-size: cover;
