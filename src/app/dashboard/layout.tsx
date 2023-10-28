@@ -1,6 +1,6 @@
 import '@/app/assets/globals.css'
 import type { Metadata } from 'next'
-import DashboardNavbar from '@/components/dashboard/DashboardNavbar'
+import Navbar from '@/components/Navbar'
 import { Suspense } from "react";
 import Loading from '@/app/loading';
 import { GetUserDetails } from '../../lib/dataHelpers';
@@ -21,7 +21,7 @@ export default async function DashBoardLayout({ children }: { children: React.Re
         <main className='relative'>
             <Suspense fallback={<Loading type='big' message='LOADING'/>}>
                 <DashboardWrapper data={userData}>
-                    <DashboardNavbar/>
+                    <Navbar toBeUsedAt='dashboard'/>
                     {children}
                 </DashboardWrapper>
             </Suspense>

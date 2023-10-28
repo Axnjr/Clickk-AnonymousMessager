@@ -3,6 +3,7 @@ import '../app/assets/globals.css'
 import type { Metadata } from 'next'
 import { Toaster } from "@/components/ui/toaster"
 import Navbar from '@/components/Navbar'
+import { pageProps } from '../../types/all-required-types'
 
 export const metadata: Metadata = {
 	title: 'Clickk® | Home',
@@ -15,7 +16,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 		<html lang="en">
 			<AllProvider>
 				<body>
-					<Navbar/>
 					{children}
 					<Toaster />
 				</body>

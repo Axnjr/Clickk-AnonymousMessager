@@ -1,5 +1,3 @@
-// // Models : Account, User, Session, VerificationToken copied as it is from next-auth docs .
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -28,6 +26,17 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model Messages {
+  id                String  @id @default(cuid())
+  status            String?
+  timestamp         String?
+  text_message      String?
+  type              String?
+  voice_message_url String?
+  userId            String
+  User              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
@@ -37,33 +46,21 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?   @unique
-  email         String?   @unique
-  emailVerified DateTime?
-  question      String?
-  image         String?
-
-  backgroundStyles String? @default("bg-[#ffffff] text-[#000000]")
-  buttonStyles     String? @default("")
-
-  membership    String?
-
-  messages      Messages[]
-  accounts      Account[]
-  sessions      Session[]
-  UserAnalytics UserAnalytics[]
-  UserMembership UserMembership[]
-}
-
-model UserMembership {
-  id                  String  @unique @default(cuid())
-  membership          String? // null || "Divine Plan - Annually"  || "Divine Plan - Monthly"
-  membershipStartDate String? // "18/02/2023"
-  membershipEndDate   String? // "18/03/2023"
-  paymentIntent       String?
-  User        User   @relation(fields: [userId], references: [id])
-  userId      String @unique
+  id               String          @id @default(cuid())
+  name             String?         @unique
+  email            String?         @unique
+  emailVerified    DateTime?
+  backgroundStyles String?         @default("bg-[#ffffff] text-[#000000]")
+  buttonStyles     String?         @default("bg-[#000000] text-[#ffffff]")
+  question         String?
+  image            String?
+  membership       String?
+  messageType      String?         @default("text")
+  Account          Account[]
+  Messages         Messages[]
+  Session          Session[]
+  UserAnalytics    UserAnalytics?
+  UserMembership   UserMembership?
 }
 
 model UserAnalytics {
@@ -72,8 +69,18 @@ model UserAnalytics {
   page_clicks Int?   @default(0)
   responses   Int?   @default(0)
   spam        Int?   @default(0)
-  User        User   @relation(fields: [userId], references: [id])
   userId      String @unique
+  User        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model UserMembership {
+  id                  String  @unique @default(cuid())
+  membership          String?
+  membershipStartDate String?
+  membershipEndDate   String?
+  paymentIntent       String?
+  userId              String  @unique
+  User                User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -82,15 +89,4 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-}
-
-model Messages {
-  id                String  @id @default(cuid())
-  status            String?
-  timestamp         String?
-  text_message      String?
-  type              String?
-  voice_message_url String?
-  User              User    @relation(fields: [userId], references: [id])
-  userId            String
 }

@@ -50,6 +50,7 @@ export type userType = {
   membershipStartDate? : string,
   membershipEndDate? : string,
   image : string, 
+  messageType : "text" | "voice"
 }
 
 export interface Styles {

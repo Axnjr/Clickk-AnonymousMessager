@@ -18,7 +18,7 @@
 }
 
 ::selection {
-  background-color: rgb(149, 0, 255);
+  background-color: #9500ff;
   color: #001013
 }
 
@@ -39,7 +39,7 @@ body {
   background-attachment: scroll;
   overflow-x: hidden;
   height: fit-content;
-  background-color: #f4f4f4;
+  background-color: #f3f3f1;
   transition: all 1s cubic-bezier(.4, 0, 1, 1);
 }
 
@@ -50,7 +50,7 @@ body {
 }
 
 #user_page_head {
-  -webkit-text-stroke: 1px;
+  -webkit-text-stroke: 1.2px;
 }
 
 button {

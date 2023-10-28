@@ -31,10 +31,12 @@ export default async function UserPage({ params } : pageProps) {
         <>
             <Suspense fallback={<Loading type='big' message='....'/>}>
                 <main className={cn(`user_page w-screen min-h-screen flex flex-col 
-                justify-center items-center`,data.backgroundStyles)}>
+                justify-center items-center`
+                ,data.backgroundStyles
+                )}>
                     <UserPageWrapper data={data}/>
                     <a className="flex items-center p-12">
-                        <h1 className="text-xl font-black tracking-tighter"><span></span>Clickk™</h1>
+                        <h1 className="text-xl font-black tracking-tighter"><span></span>Clickk.link</h1>
                     </a>
                 </main>
             </Suspense>

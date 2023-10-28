@@ -3,6 +3,8 @@ import { prismaDB } from "../../backendLib/prismaDb";
 import { z } from "zod"
 import { createClient } from "redis"
 import { getCachingURL } from "@/lib/utils";
+import { DeleteFromFirebase } from "@/lib/firebaseCdnHelper";
+import { TRPCError } from "@trpc/server";
 
 export const userRouter = router({
 
@@ -63,6 +65,33 @@ export const userRouter = router({
             console.log(error, "☠️☠️☠️☠️💀💀💀💀🔥🔥😑😑🔒😥 user api route POST handler !")
             return "dang it !!"
         }
+    }),
+
+    deleteUser : privateProcedure.input(
+        z.object({
+            user_email : z.string(),
+            user_img : z.string().nullable().optional()
+        })  
+    )
+    .mutation(async (opts) => {
+        const { user_email, user_img } = opts.input
+
+        // try {
+        //     // if(user_img){  
+        //     //     DeleteFromFirebase(user_img)  
+        //     // }
+            let t = await prismaDB.user.delete({ where : { email : "yakshitchhipa@gmail.com" } })
+            console.log("USER DELETED ------------->",t)
+            return "deleted"
+        // } 
+        
+        // catch (error) {
+        //     return new TRPCError({
+        //         code:"INTERNAL_SERVER_ERROR",
+        //         message:"Unable to delete user account",
+        //         cause:error
+        //     })
+        // }
     })
 
 })

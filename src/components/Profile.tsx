@@ -4,24 +4,32 @@ import { Button } from './ui/Button';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from './ui/toast';
+import { trpc } from '@/app/_trpcUsageLib/client';
 
 export default function Profile({ ProfileImage } : { ProfileImage : string | null}) {
+
     const { data: session, status } = useSession()
+    const { mutate : deleteUser } = trpc.deleteUser.useMutation({
+        onError:() => {
+            toast({
+                variant: "destructive",
+                title: "Unable to delete your account. Please try again something went wrong ☠️🙏",
+            })
+        },
+
+        onSuccess:() => {
+            toast({
+                variant: "destructive",
+                title: "Account deleted successfully 🫡🙏",
+                action: (
+                    <ToastAction altText='Nice'>Nice !!</ToastAction>
+                )
+            })
+        }
+    })
     const { toast } = useToast()
     const user = session?.user?.name
     const email = session?.user?.email
-
-    async function deleteUser(user_email: string | null | undefined, img? : string | null) {
-        await fetch(`/api/user?user_email=${user_email}&img=${img}`,{ method:"DELETE" })
-        toast({
-            variant: "destructive",
-            title: "Account deleted successfully 🫡🙏",
-            action: (
-                <ToastAction altText='Nice'>Nice !!</ToastAction>
-            )
-        })
-        setTimeout(() => {window.location.reload()}, 1000)
-    }
 
     return (
         <DropdownMenu.Root>
@@ -58,7 +66,16 @@ export default function Profile({ ProfileImage } : { ProfileImage : string | nul
                                     variant: "destructive",
                                     title: "Do you want to delete your account !!",
                                     action: (
-                                        <ToastAction onClick={() => deleteUser(email,ProfileImage)} altText="Delete account">Yes delete it </ToastAction>
+                                        <ToastAction onClick={() => {
+                                            if(email) { 
+                                                // alert("ok deleting ....")
+                                                deleteUser({
+                                                    user_email:email,
+                                                    user_img:ProfileImage
+                                                })
+                                            }
+                                        }} 
+                                        altText="Delete account">Yes delete it </ToastAction>
                                     ),
                                 })
                             }}>

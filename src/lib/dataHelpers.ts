@@ -40,6 +40,7 @@ export async function GetDetails(username ?: string | null) : Promise<userType |
 		;
 
 		const cachedUer = await cache.get(username)
+		
 		if (cachedUer) {
 			console.log(colors.blue.underline("cached user"))
 			return JSON.parse(cachedUer)
@@ -59,7 +60,7 @@ export async function GetDetails(username ?: string | null) : Promise<userType |
 	}
 
 	catch (error: any) {
-		console.log("Error occured in utils.ts", error);
+		console.log("Error occured in dataHelpers.ts", error);
 		return []
 	}
 }
