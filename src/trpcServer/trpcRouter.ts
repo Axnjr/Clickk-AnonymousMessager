@@ -10,4 +10,5 @@ export const appRouter = mergeRouters(
     stripeRouter,
     userRouter
 );
+
 export type AppRouter = typeof appRouter

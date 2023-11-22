@@ -20,12 +20,14 @@ export default function Themes() {
 
     const { mutate : updateUser } = trpc.updateUser.useMutation({
         onSuccess: () => {
+            setLoading(false)
             toast({
                 title: "Your new theme saved succesfully ✨🤟",
                 action: <ToastAction altText="Great!!"><a href={`/${data.name}`}>Go to your page</a></ToastAction>
             })
         },
         onError: () => {
+            setLoading(false)
             toast({
                 title: "Dang it! Unable save changes, something went wrong 😑☠️",
                 variant: "destructive"
@@ -44,11 +46,10 @@ export default function Themes() {
         updateUser({
             username : data.name,
             what : "theme",
-            json : {
+            payload : {
                 data:userBg
             }
         })
-        setLoading(false)
     }
 
     return (

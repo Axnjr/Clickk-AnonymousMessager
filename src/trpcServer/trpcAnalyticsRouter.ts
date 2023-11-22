@@ -4,7 +4,7 @@ import { prismaDB } from "../../backendLib/prismaDb";
 export const userDataRouter = router({
     getAnalytics: privateProcedure.query(async ({ ctx }) => {
 		const userID = ctx.userId
-		return JSON.stringify( await prismaDB.userAnalytics.findMany({ where : { userId : userID } }) )
+		return await prismaDB.userAnalytics.findFirst({ where : { userId : userID } }) 
 	}),
 
 	// ~ ------------------------------------------------------------------------------------------------ ~ //
@@ -12,10 +12,11 @@ export const userDataRouter = router({
 	updateAnalytics: privateProcedure.mutation(async ({ ctx }) => {
 		const userID  = ctx.userId;
 		try {
-            await prismaDB.userAnalytics.updateMany({
+            let t = await prismaDB.userAnalytics.updateMany({
                 where : { userId:userID },
                 data : { page_clicks:{increment:1} }
             })
+			console.log("ANALYTICS UPDATED ======> ",t)
         } catch (error) {  }
 		return "ok"
 	}),

@@ -26,10 +26,18 @@ export default function SendVoiceMessage() {
     async function SaveUserAudioMessage() {
         setStatus("loading")
         const audioURLFromFirebase = await UploadToFirebase(audioBlob, "wav");
+        let address;
+
+        if(data.membership){
+            let t = await (await fetch(`https://api.ipdata.co?api-key=acec1b92be56f29a548fbff3d240005eaf47a8fd6f3edc6cef3446db`)).json()
+            address = `${t.continent_name} | ${t.country_name} | ${t.city}`
+        }
+
         postMessage({
             userId: data.id,
             url: audioURLFromFirebase,
-            type: "voice"
+            type: "voice",
+            ipAddress:address
         })
     }
 
@@ -55,7 +63,6 @@ export default function SendVoiceMessage() {
 
                 mediaRecorder.onstop = async () => {
                     const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
-                    // const audioUrl = URL.createObjectURL(audioBlob);
                     setAudioBlob(audioBlob);
                 };
             })
@@ -68,8 +75,6 @@ export default function SendVoiceMessage() {
             setStatus("not_speaking");
         }
     };
-
-
 
     return (
         <>

@@ -1,23 +1,24 @@
 "use client"
-import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useAllDataFromUserContext } from "./useDataFromUserContext";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useDataFromUserContext } from "./useDataFromUserContext";
+import { useEffect } from "react";
 
 export default function useOrSetSearchParams() {
+    const searchParams = useSearchParams()
+    const signedInUserId = useDataFromUserContext("id")
     const router = useRouter()
-    const data  = useAllDataFromUserContext()
-    const searchParams  = useSearchParams()
-          
-    const [id,setId] = useState(searchParams?.get("userId"))
-    const [skip,setSkip] = useState(searchParams?.get("skip"))
+
+    let id = searchParams?.get("id")
+    // if given in search-params then ok else 0.
+    let skip = searchParams?.get("skip") ?? "0" 
+
+    if(id){
+        return [id,skip]
+    }
 
     useEffect(() => {
-        if(!id || !skip){ 
-            router.push(`?userId=${data.id}&skip=${0}`) 
-            setId(prev => data.id)
-            setSkip(prev => "0")
-        }
+        router.push(`?userId=${signedInUserId}&skip=${skip}`)
     }, [])
 
-    return [id,skip]
+    return [signedInUserId,skip]
 }

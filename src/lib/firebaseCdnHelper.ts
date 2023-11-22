@@ -20,10 +20,10 @@ function RandomFileNameGenrator() { return (Math.random() + 1).toString(36).subs
  * @param blob : a audio blob generated / recorded by the client (i did'nt knew its type hence used any 😅)
  * @returns 
  */
-export async function UploadToFirebase(blob: any, fileExtension : fileTypes, postToDB? : boolean ) {
+export async function UploadToFirebase(blob: any) {
     const random_name_for_file = RandomFileNameGenrator();
     const storage = getStorage();
-    const storageRef = ref(storage, `${random_name_for_file}.${fileExtension}`);
+    const storageRef = ref(storage, `${random_name_for_file}`);
     const upload = await uploadBytesResumable(storageRef, blob);
 	return await getDownloadURL(upload.ref)
 }

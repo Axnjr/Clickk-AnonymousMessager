@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx"
+import debounce from "lodash.debounce"
 import { twMerge } from "tailwind-merge"
 
 export async function Fetcher(
@@ -40,11 +41,12 @@ export function getSiteURL(){
     "http://localhost:3000/api/trpc"
 }
 
-export async function ClassifyMessage(data: { "inputs": string }) {
+export async function ClassifyMessage(data: { "inputs": string }) : Promise<"positive" | "negative" | "unchecked"> {
     const response = await fetch(
-        "https://api-inference.huggingface.co/models/ProsusAI/finbert",
+		"https://api-inference.huggingface.co/models/SamLowe/roberta-base-go_emotions",
         {
-            headers: { Authorization: "Bearer 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" },
+			// @ts-ignore
+            headers: { Authorization: process?.env?.NEXT_PUBLIC_HUGGING_FACE_TOKEN },
             method: "POST",
             body: JSON.stringify(data),
         }

@@ -1,5 +1,6 @@
 import { cn } from "../lib/utils";
 import { HTMLProps } from "react";
+
 export default function Loading({ type, className, message, }
 	:
 { type: "small" | "big" | "medium" , className?: HTMLProps<HTMLElement>["className"], message ?: string, }) {

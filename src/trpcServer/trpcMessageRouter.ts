@@ -1,27 +1,34 @@
 import { router, privateProcedure } from "./trpcServer";
 import { prismaDB } from "../../backendLib/prismaDb";
-import { ClassifyMessage } from "@/lib/utils";
 import { z } from "zod"
+import { TRPCError } from "@trpc/server";
+// import { ClassifyMessage } from "@/lib/utils";
+// import { pusherServer } from "../../backendLib/pusher";
 
 export const messageRouter = router({
-    getMessages: privateProcedure.input(
+	getMessages: privateProcedure.input(
 		z.object({
-			userId: z.string(),
-			skip: z.string().optional().default("0"),
+			userId: z.string().nullish(),
+			skip: z.string().optional(),
 		})
 	)
 	.query(async (opts) => {
-		const reqData = opts.input, skip = parseInt(reqData.skip);
+
+		const reqData = opts.input, skip = parseInt(reqData.skip ?? "0") ;
+
 		if (reqData.userId) {
 			return JSON.stringify({
-				data: await prismaDB.messages.findMany({
-					where: { userId: reqData.userId },
+				data:await prismaDB.messages.findMany({
+					where: {
+						userId: reqData.userId
+					},
 					take: 10,
-					skip: !isNaN(skip) ? skip : 0
+					skip: skip,
 				}),
-				count: (await prismaDB.messages.findMany({ where: { userId: reqData.userId } })).length
-			})
+				count: (await prismaDB.messages.findMany({ where: { userId: reqData.userId } })).length,
+			});
 		}
+
 	}),
 
 	// ~ ------------------------------------------------------------------------------------------------ ~ //
@@ -30,23 +37,23 @@ export const messageRouter = router({
 		z.object({
 			message: z.string().optional(),
 			userId: z.string(),
-            // type could be either text or voice 
-			type: z.union([ 
+			type: z.union([
 				z.literal("text"),
-				z.literal("voice") 
+				z.literal("voice")
 			]),
-			url:z.string().optional()
+			url: z.string().optional(),
+			ipAddress: z.string().optional(),
+			status : z.string().optional()
 		})
 	)
-	.mutation(async (opts) => {
-        // pd : postData
-		const pd = opts.input, now = new Date(); 
+	.mutation(async (opts) => { 
+		const pd = opts.input, now = new Date() ; // pd : postData
 
 		if (pd.message && pd.type === "text" && pd.userId) {
-			const classification_label: string = await ClassifyMessage({ "inputs": pd.message });
 
-			console.log("cllasification label -> ", classification_label)
-			if (classification_label == "negative") {
+			const toxicSentiments = ["embarrassment","disgust","disappointment","annoyance","anger"]
+
+			if (toxicSentiments.includes(pd.status as string)) {
 				console.log("GOT SPAM")
 				try {
 					await prismaDB.userAnalytics.updateMany({
@@ -56,28 +63,22 @@ export const messageRouter = router({
 				} catch (error) { console.log("analytics -", error) }
 			}
 
-			else {
-				console.log("GOT RESPONSE")
-				try {
-					await prismaDB.userAnalytics.updateMany({
-						where: { userId: pd.userId },
-						data: { responses: { increment: 1 } }
-					})
-				} catch (error) { console.log("analytics -", error) }
-			}
-
 			try {
 				const message = await prismaDB.messages.create({
 					data: {
 						text_message: pd.message,
 						userId: pd.userId,
-						status: classification_label,
+						status: pd.status,
 						timestamp: `${now.toLocaleDateString()} - ${now.toLocaleTimeString()}`,
-						type: "text"
+						type: "text",
+						hints:pd.ipAddress ?? ""
 					}
 				})
+
+				console.log(message)
+
 				// console.log("Untill pusher everything executed fine !!")
-				// pusherServer.trigger(userID, "message", message)
+				// pusherServer.trigger(pd.userId, "message", message)
 				return "ok"
 			}
 
@@ -94,13 +95,17 @@ export const messageRouter = router({
 						text_message: pd.url,
 						userId: pd.userId,
 						timestamp: `${now.toLocaleDateString()} - ${now.toLocaleTimeString()}`,
-						type: "voice"
+						type: "voice",
+						hints: pd.ipAddress ?? ""
 					}
 				})
-				console.log("VOICE MESSAGE SAVED SUCCESSFULLY !!")
-				// pusherServer.trigger(userID, "message", message)
+
+				// console.log("VOICE MESSAGE SAVED SUCCESSFULLY !!")
+				// pusherServer.trigger(pd.userId, "message", message)
+
 				return "ok"
 			}
+
 			catch (error) {
 				console.log("Query message api route type = voice catch error part ----- >", error)
 				return "something went wrong"
@@ -109,4 +114,28 @@ export const messageRouter = router({
 
 		return "Error either params 'message' or 'userID' or 'type' was not provided"
 	}),
+
+	// ~ ------------------------------------------------------------------------------------------------ ~ //
+
+	moveToSpam : privateProcedure.input(
+		z.object({
+			messageId:z.string()
+		})
+	)
+	.mutation(async (opts) => {
+		if(opts.input.messageId){
+			try {
+				await prismaDB.messages.update({
+					where : { id : opts.input.messageId },
+					data : { status : "negative" }
+				})
+				return "ok"
+			} 
+			catch (error) {
+				return new TRPCError({
+					code:"INTERNAL_SERVER_ERROR"
+				})
+			}
+		}
+	})
 })
